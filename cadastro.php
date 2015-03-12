@@ -6,36 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="style/cadastro.css"/>
 	</head>
 	<body>
-		<header>
-			<div id="top">
-				<div class="content">
-					<div class="logo" style="background: url('images/logo.jpg'); background-size: 100% 100%;">
-					</div>
-					<div class="login">
-						<form method="POST" action="liberte.php?cadastro=true">
-							<input type="text" size="20" placeholder="E-mail" name="email"></br>
-							<input type="password" size="20" placeholder="Senha" name="senha"></br>
-							<a href="cadastro.php"><input type="button" class="login_btn" value="Cadastrar-se"/></a>
-							<input type="submit" class="login_btn" value="Entrar">
-						</form>
-					</div>
-				</div>
-			</div><!-- end-header -->
-			<div id="nav">
-				<div class="content">
-				<div id="bar"></div>
-					<ul>
-						<li><a class="menun" onmouseover="move(0);" href="#">Início</a></li>
-						<li><a class="menun" onmouseover="move(1);" href="#">Mundo</a></li>
-						<li><a class="menun" onmouseover="move(2);" href="#">Ciência</a></li>
-						<li><a class="menun" onmouseover="move(3);" href="#">Tecnologia</a></li>
-						<li><a class="menun" onmouseover="move(4);" href="#">Arte</a></li>
-						<li><a class="menun" onmouseover="move(5);" href="#">Entretenimento</a></li>
-						<li><a class="menun" onmouseover="move(6);" href="#">Política</a></li>
-					</ul>
-				</div>
-			</div><!-- end-nav -->
-		</header>
+		<?php include "template/header.php"; ?>
 		<div id="inner-content">
 			<div class="form-content header">
 				<h2>Cadastro</h2>
@@ -80,18 +51,6 @@
 							<div class="clear"></div>
 						</li>
 						<li>
-							<div>
-								<label for="cpf">CPF:</label>
-								<input type="text" size="11" maxlength="11" placeholder="Apenas números" name="cpf"/>
-							</div>
-							<div>
-								<label for="tel">Telefone:</label>
-								<input type="text" size="2" maxlength="2" name="ddd" placeholder="(DDD)"/>
-								<input type="text" size="9" maxlength="9" name="tel"/>
-							</div>
-							<div class="clear"></div>
-						</li>
-						<li>
 							<label>Sexo:</label>
 							<div>
 								<label for="masc">
@@ -111,29 +70,6 @@
 							<div>
 								<label for="dt_nasc">Data de nascimento:</label>
 								<input type="text" size="11" maxlength="12" placeholder="DD/MM/AAAA" name="dt_nasc"/>
-							</div>
-							<div class="clear"></div>
-							<div>
-								<label for="cep">CEP:</label>
-								<input type="text" size="11" maxlength="8" placeholder="Apenas números" name="cep"/>
-							</div>
-							<div class="clear"></div>
-						</li>
-						<li>
-							<div>
-								<label for="end">Endereço:</label>
-								<input type="text" size="20" maxlength="40" name="end"/>
-							</div>
-							<div>
-								<label for="num">Número:</label>
-								<input type="text" size="4" maxlength="8" name="num"/>
-							</div>
-							<div class="clear"></div>
-						</li>
-						<li>
-							<div>
-								<label for="comp">Complemento(ex: referência, casa, ap, etc.):</label>
-								<input type="text" size="20" maxlength="50" name="comp"/>
 							</div>
 							<div class="clear"></div>
 						</li>
