@@ -21,9 +21,8 @@
 				$dtM = substr($dt, 3, 2);
 				$dtA = substr($dt, 6, 4);
 				$dt_nasc = $dtA.'-'.$dtM.'-'.$dtD;
-				$sql = 'insert usuario (cpf, nome, sobrenome, sexo, dt_nasc, cep, endereco, complemento, num, cidade, estado, email, senha, perfil_img)'.
-				 'value("'.$_POST["cpf"].'","'.$_POST["nome"].'","'.$_POST["sobrenome"].'","'.$_POST["sexo"].'","'.$dt_nasc.'","'.$_POST["cep"].'",'.
-				 	'"'.$_POST["end"].'","'.$_POST["comp"].'","'.$_POST["num"].'","'.$_POST["cidade"].'",'.
+				$sql = 'insert usuario (nome, sobrenome, sexo, dt_nasc, cidade, estado, email, senha, perfil_img)'.
+				 'value("'.$_POST["nome"].'","'.$_POST["sobrenome"].'","'.$_POST["sexo"].'","'.$dt_nasc.'","'.$_POST["cidade"].'",'.
 				 	'"'.$_POST["estado"].'","'.$_POST["email"].'","'.$_POST["senha"].'","'.$perfil_img.'")';
 				$rs = mysql_query($sql, $con);
 				if($rs){
@@ -34,7 +33,7 @@
 				}
 			}
 			else if((isset($_POST['email'])) or (isset($_GET['id']))){
-				include 'userread.php';
+				include 'user_header.php';
 			}
 			else{
 				include 'header.php';
