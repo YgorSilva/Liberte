@@ -11,8 +11,8 @@
 			<form id="materia-form" method="POST" action="novamateria.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
 				Capa: <input type="file" name="capa"/>
 			<div id="elmt-content">
-				<div class="materia titulo" id="titulo" onclick="editH(this);" already='false'>Nova matéria</div>
-				<div class="materia subtitulo" id="subtitulo" onclick="editH(this);" already='false'>Sub-titulo</div>
+				<div class="materia titulo" style="text-align: center;" id="titulo" onclick="editH(this);" already='false'>Nova matéria</div>
+				<div class="materia subtitulo" style="text-align: center;" id="subtitulo" onclick="editH(this);" already='false'>Sub-titulo</div>
 				<textarea id="conteudo" rows="20" cols="20"></textarea>
 			</div>
 			<center>

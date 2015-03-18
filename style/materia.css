@@ -21,13 +21,10 @@
 .materia.titulo, .materia.titulo input{
 	font-weight: bold;
 	font-size: 20px;
+	border: 1px solid #fff;
 }
 .materia.subtitulo, .materia.subtitulo input{
 	font-style: italic;
 	font-size: 18px;
-}
-.materia.paragrafo, .materia.paragrafo textarea{
-	font-family: inherit;
-	font-style: none;
-	font-size: 16px;	
+
 }

@@ -3,7 +3,21 @@ var idN = 3, func;
 function editH(elmt){
 	if(!(elmt.already)){
 		var cont = elmt.innerHTML;
-		elmt.innerHTML = "<input type='text' maxlenght='140' size='20' value='"+cont+"'></input><button onclick='changeValue("+elmt.id+")'>Pronto</button>";
+		var input = document.createElement('input');
+		var btn = document.createElement('input');
+		elmt.innerHTML = "";
+		input.type = 'text';
+		input.maxLength = '140';
+		input.size = 60;
+		input.value = cont;
+		input.style.textAlign = 'center';
+		btn.type = "button";
+		btn.value = "Pronto";
+		btn.style.fontSize = "14px";
+		btn.style.fontWeight = "initial";
+		btn.onclick = function(){changeValue(elmt);};
+		elmt.appendChild(input);
+		elmt.appendChild(btn); 
 		elmt.already = true;
 	}
 }
