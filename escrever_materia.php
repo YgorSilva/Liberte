@@ -11,11 +11,11 @@
 			<form id="materia-form" method="POST" action="novamateria.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
 				Capa: <input type="file" name="capa"/>
 			<div id="elmt-content">
-				<div class="materia titulo" id="elmt1" onclick="editH(this);" already='false'>Nova matéria</div>
-				<div class="materia subtitulo" id="elmt2" onclick="editH(this);" already='false'>Sub-titulo</div>
+				<div class="materia titulo" id="titulo" onclick="editH(this);" already='false'>Nova matéria</div>
+				<div class="materia subtitulo" id="subtitulo" onclick="editH(this);" already='false'>Sub-titulo</div>
+				<textarea id="conteudo" rows="20" cols="20"></textarea>
 			</div>
 			<center>
-				<input type="button" onclick='addP();' value="Adicionar parágrafo"/>
 				<input type="button" onclick='enviar();' value="Enviar matéria"/>
 			</center>
 			</form>
@@ -23,5 +23,7 @@
 		<?php include 'template/footer.php'; ?>
 		<script src="js/menu-bar.js" type="text/javascript"></script>
 		<script src="js/materia.js" type="text/javascript"></script>
+		<script src="tinymce\js\tinymce\tinymce.js" type="text/javascript"></script>
+		<script>tinymce.init({selector:'textarea'});</script>
 	</body>
 </html>

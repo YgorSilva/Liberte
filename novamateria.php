@@ -16,15 +16,8 @@
 			else{
 				$_FILES["capa"] = 'capa_default.png';
 			}
-			$sql = 'insert materia (autor, capa, titulo, subtitulo) values("'.$id.'","'.$capa.'","'.$_POST['elmt'][0].'","'.$_POST['elmt'][1].'")';
+			$sql = 'insert materia (autor, capa, titulo, subtitulo, conteudo) values("'.$id.'","'.$capa.'","'.$_POST['titulo'][0].'","'.$_POST['subtitulo'].'","'.$_POST['conteudo'].'")';
 			$rs = mysql_query($sql, $con);
-			$sql = 'select id from materia where autor = '.$_GET['id'].' order by id desc';
-			$rs = mysql_query($sql, $con);
-			$reg = mysql_fetch_array($rs);
-			for ($i=2; $i < sizeof($_POST['elmt']); $i++) { 
-				$sql = 'insert paragrafo (materia, conteudo) values("'.$reg['id'].'", "'.$_POST['elmt'][$i]	.'")';
-				$rs = mysql_query($sql, $con);
-			}
 		?>
 		<div id="inner-content">
 			<div id="materia-content">
@@ -41,6 +34,5 @@
 		</div>
 		<?php include 'template/footer.php'; ?>
 		<script src="js/menu-bar.js" type="text/javascript"></script>
-		<script src="js/materia.js" type="text/javascript"></script>
 	</body>
 </html>
