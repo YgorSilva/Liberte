@@ -1,19 +1,20 @@
 <html>
 	<head>
+		<?php include 'PHP/connect.php'; ?>
 		<title>Liberté</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" href="style/liberte.css"/>
 		<link rel="stylesheet" type="text/css" href="style/nova-materia.css"/>
 	</head>
 	<body>
-		<?php include 'template/user_identify.php'; ?>
+		<?php include 'template/userHeader.php'; ?>
 		<div id="inner-content">
-			<form id="materia-form" method="POST" action="novamateria.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
+			<form id="materia-form" method="POST" action="novamateria.php" enctype="multipart/form-data">
 				Capa: <input type="file" name="capa"/>
 			<div id="elmt-content">
 				<div class="materia titulo" style="text-align: center;" id="titulo" onclick="editH(this);" already='false'>Nova matéria</div>
 				<div class="materia subtitulo" style="text-align: center;" id="subtitulo" onclick="editH(this);" already='false'>Sub-titulo</div>
-				<textarea id="conteudo" rows="20" cols="20"></textarea>
+				<textarea id="conteudo" name="conteudo" rows="20" cols="20"></textarea>
 			</div>
 			<center>
 				<input type="button" onclick='enviar();' value="Enviar matéria"/>
