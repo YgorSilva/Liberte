@@ -37,12 +37,13 @@ function enviar(){
 	input.type = "hidden";
 	input.name = "titulo";
 	input.value = divs[0].innerHTML;
-	document.getElementById("materia-form").appendChild(input);
+	document.getElementById("materia-form").appendChild(input);	
+	input = document.createElement("input");
 	input.type = "hidden";
 	input.name = "subtitulo";
 	input.value = divs[1].innerHTML;
 	document.getElementById("materia-form").appendChild(input);
-	var input = document.createElement("input");
+	input = document.createElement("input");
 	input.type = "submit";
 	document.getElementById("materia-form").appendChild(input);
 	input.click();

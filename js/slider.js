@@ -6,7 +6,6 @@ document.getElementById("img_slider").style.transition = "1.5s";
 function slider(){
 	document.getElementById("img_slider").style.background = 'url('+img[i%img.length]+')';
 	slide_link.href = href[i%img.length];
-	console.log('url('+href[i%img.length]+')');
 	document.getElementById("img_slider").style.backgroundRepeat = "no-repeat";
 	document.getElementById("img_slider").style.backgroundSize = "100% 100%";
 	indicate();

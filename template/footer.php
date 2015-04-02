@@ -7,5 +7,5 @@
 			Copyright © Liberté <?php echo date('Y'); ?>. Todos os direitos reservados.
 		</div>
 	</div>
-	<?php mysql_close($con); ?>
+	<?php include 'PHP/endConnect.php'; ?>
 </footer>

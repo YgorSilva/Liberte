@@ -1,15 +1,11 @@
 <header>
 	<link rel="stylesheet" type="text/css" href="style/index.css"/>
-	<?php
-		$con = mysql_connect('localhost', 'root', '');
-		$db = mysql_select_db('liberte', $con);
-	?>
 	<div id="top">
 		<div class="content">
 			<div class="logo" style="background: url('images/logo.jpg'); background-size: 100% 100%;">
 			</div>
 			<div class="login">
-				<form method="POST" action="liberte.php">
+				<form method="POST" action="login.php">
 					<input type="text" size="20" placeholder="E-mail" name="email"></br>
 					<input type="password" size="20" placeholder="Senha" name="senha"></br>
 					<a href="cadastro.php"><input type="button" class="login_btn" value="Cadastrar-se"/></a>
