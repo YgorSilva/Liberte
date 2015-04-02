@@ -1,45 +1,54 @@
 <html>
 	<head>
+		<?php include 'PHP/connect.php'; ?>
 		<title>Liberté</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" href="style/materia.css"/>
 		<link rel="stylesheet" type="text/css" href="style/liberte.css"/>
 	</head>
 	<body>
-		<?php include 'template/user_identify.php'; ?>
-		<?php
-			$sql = 'select * from materia where id = '.$_GET['mat_id'];
-			$rs = mysql_query($sql, $con);
+		<?php 
+			if(isset($_SESSION['user'])) include 'template/userHeader.php';
+			else include 'template/header.php';
+
+			$sql = 'select * from materias where idMateria = "'.$_GET['matId'].'"';
+			$rs = mysql_query($sql);
 			$reg = mysql_fetch_array($rs);
-			$id = $reg['id'];
+			$id = $reg['idMateria'];
 			$capa = $reg['capa'];
 			$titulo = $reg['titulo'];
 			$subtitulo = $reg['subtitulo'];
 			$autor = $reg['autor'];
-			$sql = 'select nome, sobrenome from usuario where id = '.$autor;
-			$rs = mysql_query($sql, $con);
+			$conteudo = $reg['conteudo'];
+			
+			$sql = 'select nome, sobrenome from usuarios where email = "'.$autor.'"';
+			$rs = mysql_query($sql);
 			$reg = mysql_fetch_array($rs);
-			$autor_nome = $reg['nome'];
-			$autor_sobrenome = $reg['sobrenome'];
+			$autorNome = $reg['nome'];
+			$autorSobrenome = $reg['sobrenome'];
+		
+			$sql = 'select count(*) from aprovarDesaprovar where isPositivo = true';
+			$rs = mysql_query($sql);
+			$aprovar = mysql_fetch_array($rs)[0];
+
+			$sql = 'select count(*) from aprovarDesaprovar where isPositivo = false';
+			$rs = mysql_query($sql);
+			$desaprovar = mysql_fetch_array($rs)[0];
 		?>
 		<div id="inner-content">
 			<div id="materia-content">
 				<img src="images/<?php echo $capa; ?>" style="width: 530px; height: 300px;"/>
 				<h1><?php echo $titulo ?></h1>
 				<h3><?php echo $subtitulo ?></h3>
-				<?php
-					$sql = 'select * from paragrafo where materia = "'.$id.'" order by id';
-					$rs = mysql_query($sql, $con);
-					for ($i=0; $i < mysql_num_rows($rs); $i++) { 
-						$reg = mysql_fetch_array($rs);
-						echo $reg['conteudo'];					
-					}
-				?>
-				<h6> por <?php echo $autor_nome.' '.$autor_sobrenome; ?></h6>
+				<?php echo $conteudo; ?>
+				<h6> por <?php echo $autorNome.' '.$autorSobrenome; ?></h6>
 			</div>
+			<button onclick="insert(1, <?php echo $id; ?>)">Aprovar</button><span id="aprovar"><?php echo ' '.$aprovar; ?></span>
+			<button onclick="insert(0, <?php echo $id; ?>)">Desaprovar</button><span id="desaprovar"><?php echo ' '.$desaprovar; ?></span>
 		</div>
 		<?php include 'template/footer.php'; ?>
 		<script src="js/menu-bar.js" type="text/javascript"></script>
 		<script src="js/materia.js" type="text/javascript"></script>
+		<script src="js/aprovar.js" type="text/javascript"></script>
 	</body>
 </html>
