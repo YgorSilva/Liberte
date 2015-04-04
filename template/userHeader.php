@@ -1,8 +1,9 @@
 <header>
 <?php 
 	include 'PHPClasses/userClass.php';
-	$user = new user();
-	$user->feedData($_SESSION['user']);
+	
+	$serialUser = $_SESSION['user'];
+	$user = unserialize($serialUser);
 	$userData = $user->getData();
 ?>
 <link rel="stylesheet" type="text/css" href="style/userHeader.css"/>
