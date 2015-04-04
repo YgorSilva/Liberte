@@ -34,13 +34,7 @@
 	' values("'.$userData['email'].'","'.$capa.'","'.$_POST['titulo'].'","'.$_POST['subtitulo'].'","'.$conteudo.'")';
 	$rs = mysql_query($sql);
 	
-	if($rs){
-		$sql = 'select idMateria from materias where autor = "'.$userData['email'].'" order by idMateria desc';
-		$rs = mysql_query($sql);
-		$reg = mysql_fetch_array($rs);
-		echo '<meta http-equiv="refresh" content="0;URL=materia.php?matId='.$reg['idMateria'].'">';
-	}
-	else echo mysql_error();
-	echo '<textarea cols="60" rows="20">'.$conteudo.'</textarea>';
+	if($rs) echo '<meta http-equiv="refresh" content="0;URL=materia.php?matId='.mysql_insert_id().'">';
+	else echo '<meta http-equiv="refresh" content="0;URL=escrever_materia.php';
 	include 'PHP/endConnect.php';
 ?>
