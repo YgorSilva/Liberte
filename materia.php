@@ -18,7 +18,10 @@
 				echo $reg;
 				$isPositive = $already ? $reg : false;
 			}
-			else include 'template/header.php';
+			else{
+				include 'template/header.php';
+				$already = false;
+			} 
 
 			$sql = 'select * from materias where idMateria = "'.$_GET['matId'].'"';
 			$rs = mysql_query($sql);
