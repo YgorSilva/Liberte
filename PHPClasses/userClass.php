@@ -1,5 +1,5 @@
 <?php
-	Class user{
+	Class User{
 		private $email;
 		private $senha;
 		private $nome;
@@ -63,6 +63,16 @@
 				'"'.$dtNasc.'","'.$_POST["cidade"].'","'.$_POST["estado"].'","'.$imgPerfil.'")';
 			$rs = mysql_query($sql);
 			return $rs;
+		}
+
+		public function login($email, $senha){
+			$sql = 'select * from usuarios where email = "'.$email.'" and senha = "'.$senha.'"';
+			$rs = mysql_query($sql);
+			if($rs){
+				$this->feedData($email);
+				return true;
+			}
+			else return false;
 		}
 	}
 ?>
