@@ -6,10 +6,11 @@
 			</div>
 			<div class="login">
 				<form method="POST" action="login.php">
-					<input type="text" size="20" placeholder="E-mail" name="email"></br>
-					<input type="password" size="20" placeholder="Senha" name="senha"></br>
+					<input id="email" type="text" size="20" placeholder="E-mail" name="email"></br>
+					<input id="pw" type="password" size="20" placeholder="Senha" name="senha"></br>
 					<a href="cadastro.php"><input type="button" class="login_btn" value="Cadastrar-se"/></a>
-					<input type="submit" class="login_btn" value="Entrar">
+					<input type="button" onclick="login();" class="login_btn" value="Entrar"></br>
+					<span id='login_msg' style="color: red; font-size: 10pt"></span>
 				</form>
 			</div>
 		</div>
@@ -28,4 +29,5 @@
 			</ul>
 		</div>
 	</div>
+	<script src="js/login.js" type="text/javascript"></script>
 </header>

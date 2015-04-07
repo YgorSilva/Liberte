@@ -27,7 +27,7 @@
 		}
 
 		public function getData(){
-			$array = ['email' => $this->email, 
+			$dataArray = ['email' => $this->email, 
 						'senha' => $this->senha, 
 						'nome' => $this->nome, 
 						'sobrenome' => $this->sobrenome, 
@@ -36,7 +36,7 @@
 						'imgPerfil' => $this->imgPerfil, 
 						'cidade' => $this->cidade, 
 						'estado' => $this->estado];
-			return $array;
+			return $dataArray;
 		}
 
 		public function insertData(){			
@@ -68,11 +68,19 @@
 		public function login($email, $senha){
 			$sql = 'select * from usuarios where email = "'.$email.'" and senha = "'.$senha.'"';
 			$rs = mysql_query($sql);
-			if($rs){
+			$reg = mysql_fetch_array($rs)[0];
+			if(!is_null($reg)){
 				$this->feedData($email);
 				return true;
 			}
 			else return false;
+		}
+
+		public function checkEmail($email){
+			$sql = 'select * from usuarios where email = "'.$email.'"';
+			$rs = mysql_query($sql);
+			$reg = mysql_fetch_array($rs)[0];
+			return !is_null($reg)? true : false;
 		}
 	}
 ?>
