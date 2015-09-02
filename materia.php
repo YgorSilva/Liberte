@@ -3,70 +3,72 @@
 		<?php include 'PHP/connect.php'; ?>
 		<title>Liberté</title>
 		<meta charset="utf-8"/>
-		<link rel="stylesheet" type="text/css" href="style/materia.css"/>
 		<link rel="stylesheet" type="text/css" href="style/liberte.css"/>
+		<link rel="stylesheet" type="text/css" href="style/posts.css"/>
+		<link rel="stylesheet" type="text/css" href="style/materia.css"/>
+		<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<?php 
+			$id = $_GET['matId'];
 			if(isset($_SESSION['user'])){
+				include 'C:\xampp\htdocs\Liberte\PHPClasses\userClass.php';
+				$user = unserialize($_SESSION['user']);
+				$userData = $user->getData();
 				include 'template/userHeader.php';				
 
-				$sql = 'select isPositivo from aprovarDesaprovar where usuario = "'.$userData['email'].'"';
-				$rs = mysql_query($sql);
-				$reg = mysql_fetch_array($rs)[0];
-				$already = is_null($reg)?false:true;
-				echo $reg;
-				$isPositive = $already ? $reg : false;
+				$already = 'if(
+					(select count(*) from aprovarDesaprovar where usuario = "'.$userData['email'].'" and materia = a.idMateria) = 0, 
+					NULL, 
+					(select isPositivo from aprovarDesaprovar 
+					where usuario = "'.$userData['email'].'" and materia = a.idMateria)) 
+					as already';
+				$authorName = '(select concat(nome, " ", sobrenome) from usuarios where email = a.autor) as authorName';
+				$aproves = '(select count(*) from aprovarDesaprovar where isPositivo and materia = a.idMateria) as aproves';
+				$desaproves = '(select count(*) from aprovarDesaprovar where not isPositivo and materia = a.idMateria) as desaproves';
+				$sql = 'select a.*, '.$already.', '.$authorName.', '.$aproves.', '.$aproves.', '.$desaproves.' from materias as a where idMateria = "'.$id.'"';
+				$mat = mysql_fetch_array(mysql_query($sql));
 			}
 			else{
 				include 'template/header.php';
-				$already = false;
-			} 
-
-			$sql = 'select * from materias where idMateria = "'.$_GET['matId'].'"';
-			$rs = mysql_query($sql);
-			$reg = mysql_fetch_array($rs);
-			$id = $reg['idMateria'];
-			$capa = $reg['capa'];
-			$titulo = $reg['titulo'];
-			$subtitulo = $reg['subtitulo'];
-			$autor = $reg['autor'];
-			$conteudo = $reg['conteudo'];
-			
-			$sql = 'select nome, sobrenome from usuarios where email = "'.$autor.'"';
-			$rs = mysql_query($sql);
-			$reg = mysql_fetch_array($rs);
-			$autorNome = $reg['nome'];
-			$autorSobrenome = $reg['sobrenome'];
-		
-			$sql = 'select count(*) from aprovarDesaprovar where isPositivo = true';
-			$rs = mysql_query($sql);
-			$aprovar = mysql_fetch_array($rs)[0];
-
-			$sql = 'select count(*) from aprovarDesaprovar where isPositivo = false';
-			$rs = mysql_query($sql);
-			$desaprovar = mysql_fetch_array($rs)[0];			
+			}
+			include 'template/navBar.php';
 		?>
-		<div id="inner-content">
+		<div id='inner-content'>
 			<div id="materia-content">
-				<img src="images/<?php echo $capa; ?>" style="width: 530px; height: 300px;"/>
-				<h1><?php echo $titulo ?></h1>
-				<h3><?php echo $subtitulo ?></h3>
-				<?php echo $conteudo; ?>
-				<h6> por <?php echo $autorNome.' '.$autorSobrenome; ?></h6>
+				<div id='info'>
+					<a href='user.php?<?=$mat['autor']?>'><div class='authorDiv'>
+						<img class='authorImg' src='layoutImages/PHFeh.jpg' width='30px' height='30px'/>
+						<div><?=$mat['authorName']?></div>
+					</div></a>
+					<h5 style='float: right;'><?=$mat['date']?></h5>
+				</div>
+				<img id='cover' src="images/<?=$mat['capa']?>" style="width: 80%; margin-left: 10%;"/>
+				<h1><?=$mat['titulo']?></h1>
+				<h3><?=$mat['subtitulo']?></h3>
+				<span id="content"><?=$mat['conteudo']?></span>
+				<?php
+					if(@$userData['email'] == $mat['autor']) echo '<a class="sub" href="editar.php?matId='.$id.'">Editar</a>';
+					else{
+						echo '<a href="user.php?e='.$mat['autor'].'"><h6>por '.$mat['authorName'].'</h6></a>';
+						echo '<a onclick="setDenuncia(this)"><h6>Denunciar</h6></a>';
+					} 	
+				?>
 			</div>
-			<button id="btnAprovar" onclick="<?php echo $already&&$isPositive?'undo':'insert'?>(1, <?php echo $id.", '".$userData['email']."'"; ?>)">
-				<?php echo $already&&$isPositive?'Aprovado':'Aprovar'; ?>
-			</button>
-			<span id="aprovar"><?php echo ' '.$aprovar; ?></span>
-			<button id="btnDesaprovar" onclick="<?php echo $already&&!$isPositive?'undo':'insert'?>(0, <?php echo $id.", '".$userData['email']."'"; ?>)">
-				<?php echo $already&&!$isPositive?'Desaprovado':'Desaprovar'; ?>
-			</button>
-			<span id="desaprovar"><?php echo ' '.$desaprovar; ?></span>
+			<div id='interact'>
+				<button class='btnVote btnAprova<?=($mat['already'] == null?'r' : ($mat['already']? 'do' : 'r'))?>'>
+				</button>
+				<span class="n aprovar"><?=$mat['aproves']?></span>
+				<button class='btnVote btnDesaprova<?=($mat['already'] == null? 'r' : ($mat['already']? 'r' : 'do'))?>'>
+				</button>
+				<span class="n desaprovar"><?=$mat['desaproves']?></span>
+				<input id='commentInput' class='commentInput' type='text' placeholder='Comente sobre isso!' name='comment'/>
+				<button id='btnComment' onclick="setComment(this)">Comentar</button>
+				<div id='comments' class='comments'></div>
+			</div>
 		</div>
-		<?php include 'template/footer.php'; ?>
-		<script src="js/menu-bar.js" type="text/javascript"></script>
+		<?php include 'PHP/endConnect.php'; ?>
 		<script src="js/materia.js" type="text/javascript"></script>
-		<script src="js/aprovar.js" type="text/javascript"></script>
+		<script src="js/setVote.js" type="text/javascript"></script>
 	</body>
 </html>

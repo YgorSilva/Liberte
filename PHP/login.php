@@ -11,7 +11,7 @@
 	}
 	else{
 		$try = $user->checkEmail($_GET['email']);
-		echo $try?'error_0':'error_1';
+		echo $try?1:2;
 	}
 	include 'endConnect.php';
 ?>

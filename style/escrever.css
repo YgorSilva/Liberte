@@ -1,7 +1,13 @@
+#inner-content{
+	margin: auto;
+	width: 80%;
+}
 #elmt-content{
-	border: 1px solid #000;
-	padding: 10px;
 	margin-bottom: 20px;
+}
+#materia-content{
+	width: 700px;
+	border: 1px solid #f4f4f4;
 }
 .materia{
 	cursor: pointer;
@@ -9,29 +15,41 @@
 	font-style: none;
 	font-weight: normal;
 	font-size: 16px;
-	border: 1px solid #fff;
+	border: 1px solid rgba(0,0,0,0);
 }
 .materia:hover{
 	border: 1px solid #000;
-	background: #f0f0f0;
+	background: rgba(0,0,0,0.2);
 }
-#materia-content{
-	width: 700px;
-	border: 1px solid #f4f4f4;
+.capa{
+	margin-left: 25%;
+	margin-top: 50px;
+}
+.fileBtn{
+	height: 0;
+	width: 0;
 }
 .materia.titulo, .materia.titulo input{
 	font-weight: bold;
+	font-family: sans-serif;
 	font-size: 20px;
 }
 .materia.subtitulo, .materia.subtitulo input{
+	font-family: sans-serif;
 	font-style: italic;
 	font-size: 18px;
 }
-input[type="text"], textarea{
+input[type="text"]{
+	background: rgba(0,0,0,0);
 	border: 0;
+	width: 90%
 }
 input[type="file"]{
 	margin-bottom: 10px;
+}
+input[type="button"]{
+	float: right;
+	margin-right: -80px;
 }
 button{
 	margin-left: 10px;

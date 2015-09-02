@@ -4,6 +4,7 @@
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" href="style/index.css"/>
 		<link rel="stylesheet" type="text/css" href="style/cadastro.css"/>
+		<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<?php include "template/header.php"; ?>
@@ -12,7 +13,7 @@
 				<h2>Cadastro</h2>
 			</div>
 			<div class="form-content">
-				<form method="POST" action="liberte.php?cadastro=true" enctype='multipart/form-data'>
+				<form method="POST" action="index.php?cadastro=true" enctype='multipart/form-data'>
 					<ul>
 						<li>
 							<div>

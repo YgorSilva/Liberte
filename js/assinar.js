@@ -1,18 +1,25 @@
-function follow(subscriber, signed, isSigning){
-	var xmlhttp = new XMLHttpRequest();
+var assinar = function(signed, isSigning){
+	var	isSigning = isSigning === undefined? 1: isSigning;
 
-	xmlhttp.onreadystatechange = function(){
-		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-			if(xmlhttp.responseText && isPositive){
-				btnAssinar.innerHTML='Assinado';
-				btnAssinar.onclick = function(){follow(subscriber, signed, 0);};
-			} 
-			else if(xmlhttp.responseText){
-				btnAssinar.innerHTML='Assinar';
-				btnAssinar.onclick = function(){follow(subscriber, signed, 1);};
-			} 
+	$.ajax({
+		url: 'PHP/assinar.php', 
+		method: 'POST', 
+		data: {signed: signed, isSigning: isSigning}
+	})
+	.success(function(response){
+		console.log(response);
+		if(response && isSigning){
+			console.log($("#btnAssinar").val());
+			$("#btnAssinar").val('Assinado');
+			btnAssinar.onclick = function(){
+				assinar(signed, 0);
+			}
 		}
-	}
-	xmlhttp.open("GET", 'PHP/assinar.php?subscriber='+subscriber+'&signed='+signed+'&isSigning='+isSigning, true);
-	xmlhttp.send();
+		else if(response){
+			$("#btnAssinar").val('Assinar');
+			btnAssinar.onclick = function(){
+				assinar(signed);
+			}	
+		}
+	})	
 }

@@ -3,8 +3,8 @@ function login(){
 
 	xmlhttp.onreadystatechange = function(){
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-			if(xmlhttp.responseText == 'error_0') login_msg.innerHTML = 'Senha inválida.';
-			else if(xmlhttp.responseText == 'error_1') login_msg.innerHTML = 'Usuário não cadastrado.';
+			if(xmlhttp.responseText == 1) login_msg.innerHTML = 'Senha inválida.';
+			else if(xmlhttp.responseText == 2) login_msg.innerHTML = 'Usuário não cadastrado.';
 			else document.body.innerHTML += xmlhttp.responseText;
 		}
 	}

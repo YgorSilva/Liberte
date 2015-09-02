@@ -1,5 +1,5 @@
 <?php
-	include 'PHP/connect.php';
+	include 'connect.php';
 	include 'PHPClasses/.userClass.php';
 	$user = new User();
 	$rs = $user->insertData();
@@ -11,5 +11,5 @@
 	else{
 		echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=cadastro.php?err=1'>";
 	}
-	include 'PHP/endConnect.php';
+	include 'endConnect.php';
 ?>

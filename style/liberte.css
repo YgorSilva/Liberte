@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "navFont";
+  src: url(http://localhost/liberte/gladifilthefte.ttf);
+}
+body{
+	padding: 0;
+	margin: 0;
+	background: url('http://localhost/Liberte/layoutImages/teste.jpg');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background: #dfdfdf;
+	padding-bottom: 50px;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+#actionBar{
+	margin: auto;
+	width: 990px;
+	height: 70px;
+	margin-top: 20px;
+}
+.notifDiv{
+	float: right;
+	margin-top: 20px;
+	background: #dfdfdf;
+	border-collapse: none;
+}
+.notifBtn{
+	cursor: pointer;
+	border: 1px solid rgba(50, 50, 50, 0);
+	border-bottom: 0;
+	border-radius: 10px 10px 0 0;
+	border-collapse: collapse; 
+	padding-right: 4px;
+	padding-left: 4px;
+}
+.notifContent{
+	border-collapse: collapse; 
+	position: absolute;
+	display: block;
+	background: rgba(0, 0, 0, 0.8);
+	margin-left: -20%;
+	border: 1px solid rgba(50, 50, 50, 0.4);
+	width: 360px;
+	overflow: auto;
+	max-height: 500px;
+	padding-left: 20px;
+	padding-right: 20px;
+	float: right;
+}
+.notificationBox{
+	border-bottom: 1px solid #000;	
+	color: white;
+}
+.notificationBox:last-child{
+	border-bottom: 0;
+}
+.notificationBox a{
+	color: #e66;
+}
+.notificationBox a:hover{
+	color: #eee;
+	text-decoration: underline;
+}
+#gridContainer{
+	margin: auto;
+	width: 	990px;
+	border-top: 2px solid rgba(50, 50, 50, 0.4);
+	/*height: 600px;
+	background: rgba(0,0,0,0.4);*/
+	margin-bottom: 30px;
+}
+.grid{
+	width: 320px;		
+	float: left;
+	padding: 5px;
+}

@@ -50,6 +50,9 @@ header{
 	margin-top: 10px;
 	font-weight: bold;
 }
+#inner-content{
+	border-top: 5px double #000;
+}
 #bar{
 	height: 5px;
 	background: #df0010;

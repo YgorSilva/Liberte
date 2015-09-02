@@ -1,0 +1,49 @@
+#nav{
+	font-family: 'navFont';
+	letter-spacing: 1px;
+	font-size: 40px;
+	width: 100%;
+	height: 120px;
+	margin-top: -10px;
+	background: url('http://localhost/Liberte/layoutImages/faixa.png');
+	background-repeat: none;
+	background-size: 100% 100%;
+}
+.logo{
+	margin-top: 20px;
+	width: 200px;
+	padding: 2px;
+}
+.logo:hover{
+	padding: 0;
+	height: 91px;
+	width: 204px;
+}
+#nav ul {
+	padding: 0;
+	margin-top: -70px;
+	list-style: none;
+}
+.leftUL{
+	float: left;
+	margin-left: 20px;
+}
+.rightUL{
+	float: right;
+	margin-right: 20px;
+}
+#nav ul li 
+{
+	padding: 0;
+	float: left;
+	position: relative;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#nav li a{
+	color: #ddd;
+	padding: 5px;
+}
+#nav li a:hover{
+	border-bottom: 3px solid #ddd;
+};

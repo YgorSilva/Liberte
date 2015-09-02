@@ -1,0 +1,103 @@
+.postBox{
+	padding: 5px;
+	margin-bottom: 20px;
+}
+.postInfo{
+	overflow: hidden;
+	background: white;
+	border-radius: 15px 15px 0 0;
+}
+.postCover{
+	float: left;
+	width: 100%;
+}
+.postTitle a, .postSubtitle{
+	color: #ddd;
+}
+.postTitle a:hover{
+	text-decoration: underline;
+}
+.postTitle{
+	display: inline-block;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.75);
+	clear: both;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+}
+.postSubtitle{
+	text-align: left;
+	font-size: 16px;
+	padding-left: 2px;
+}
+.authorDiv{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	overflow: hidden;
+	margin-left: 2px;
+	float: left;
+	padding: 2px;
+	border-radius: 19px;
+}
+.authorDiv:hover{
+	background: rgba(0, 0, 0, 0.8);
+}
+.authorDiv div{
+	margin: 0;
+	margin-top: 5px;
+	color: #ddd;
+	vertical-align: super;
+	margin-left: 2px;
+	margin-right: 2px;
+	float: right;
+	font-weight: bold;
+}
+.authorImg{
+	border-radius: 15px;
+}
+.postBtns{
+	height: 30px;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	padding-right: 4px;
+	border-bottom: 2px solid rgba(50, 50, 50, 0.4);
+	border-right: 2px solid rgba(50, 50, 50, 0.2);
+	border-left: 1px solid rgba(50, 50, 50, 0.1);
+	border-radius: 0 0 0 15px;
+	background: #dfdfdf;
+}
+.postBtns div{
+	float: right;
+}
+.postBtns button{
+	cursor: pointer;
+	background-color: #ddd;
+	background-repeat: none;
+	background-size: 100% 100%;
+	width: 30px;
+	height: 30px;
+	border-radius: 18px;
+	margin-right: 5px;
+}
+.postBtns span{
+	font-weight: bold;
+	vertical-align: super;
+	margin-right: 10px;
+}
+.btnRecomendar{
+	background-image: url('http://localhost/Liberte/layoutImages/recomendar.png');	
+}
+.btnAprovar{
+	background-image: url('http://localhost/Liberte/layoutImages/aprovar.png');
+}
+.btnAprovado{
+	background-image: url('http://localhost/Liberte/layoutImages/aprovado.png');
+}
+.btnDesaprovar{
+	background-image: url('http://localhost/Liberte/layoutImages/desaprovar.png');	
+}
+.btnDesaprovado{
+	background-image: url('http://localhost/Liberte/layoutImages/desaprovado.png');
+}
