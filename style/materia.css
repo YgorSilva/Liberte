@@ -1,11 +1,15 @@
 #inner-content{
 	margin: auto;
-	margin-top: 50px;
 	width: 80%;
 }
 #materia-content{
 	margin: auto;
 	width: 60%;
+	margin-top: 15px;
+}
+#info{
+	height: 30px;
+	margin-bottom: 10px; 
 }
 h1, h3{
 	text-align: center;

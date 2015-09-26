@@ -1,10 +1,22 @@
 <?php
-	include 'connect.php';
+	include 'C:/xampp/htdocs/Liberte/PHP/connect.php';
 	include 'C:/xampp/htdocs/Liberte/PHPClasses/userClass.php';
 	include 'C:/xampp/htdocs/Liberte/PHPClasses/dateClass.php';
 	$user = unserialize($_SESSION['user']);
 	$date = new Date();
 	$userData = $user->getData();
+
+	
+	$wordsInT = '';
+	$wordsInST = '';
+	foreach ($_POST['words'] as $i => $word) {
+		$wordsInT .= ' or titulo like("%'.$word.'%")';
+		$wordsInST .= ' or subtitulo like("%'.$word.'%")';
+	}
+	$tags = '';
+	foreach ($_POST['tags'] as $i => $tag) {
+		$tags .= '"'.$tag.'" in (select tag from tags where materia = a.idMateria) or ';
+	}
 
 	$assinados = '(select assinado from assinaturas where assinante = "'.$userData['email'].'")';
 	$assinadosBS = '(select assinado from assinaturas where assinante in '.$assinados.')';
@@ -18,9 +30,8 @@
 				where materia = a.idMateria and usuario = "'.$userData['email'].'"), 1, 0) as recomendou';
 	$comments = '((select count(*) from comentarios)*3)';
 	$commentsBS = '((select count(*) from comentarios where autor in '.$assinados.')*12)';
-	$datediff = '((select hour(timediff(now(), a.`date`)))*(-5))';
 	$score = '('.$aproves.'+(IF((select a.autor in '.$assinados.'), 240, 0)+'.$aprovesBS.'
-		+('.$recomendacoes.'*15)+'.$recomendacoesBS.'+'.$comments.'+'.$commentsBS.'+'.$datediff.'))';
+		+('.$recomendacoes.'*15)+'.$recomendacoesBS.'+'.$comments.'+'.$commentsBS.'))';
 	$authorName = '(select concat(nome, " ", sobrenome) from usuarios where email = a.autor) as authorName';
 	$aprovou = 'IF((select count(*) from aprovarDesaprovar 
 				where materia = a.idMateria and isPositivo and usuario = "'.$userData['email'].'"), 1, 0) as aprovou';
@@ -29,9 +40,10 @@
 				where materia = a.idMateria and not isPositivo and usuario = "'.$userData['email'].'"), 1, 0) as desaprovou';
 	$sql = 'select a.*, '.$score.' as score, '.$authorName.', '.$aproves.' as aprovacoes, 
 			'.$aprovou.', '.$desaprovar.', '.$desaprovou.', '.$recomendacoes.' as recomendacoes, '.$recomendou.' 
-			from materias as a order by score desc, idMateria desc';
-	$rs = mysql_query($sql);
+			from materias as a where '.$tags.'titulo like("%'.$_POST['fullText'].'%") 
+			or subtitulo like("%'.$_POST['fullText'].'%")'.$wordsInT.$wordsInST.' order by score desc, idMateria desc';
 	
+	$rs = mysql_query($sql);
 	if($rs){
 		$xml = '<?xml version="1.0" encoding="utf-8"?>';
 		$xml .= '<posts>';
@@ -54,5 +66,6 @@
 		header("Content-type: xml: encoding=UTF-8");
 		echo $xml;
 	}
-	else echo mysql_error();
+	else echo $sql.'</br>'.mysql_error();
+	include 'C:/xampp/htdocs/Liberte/PHP/endConnect.php';
 ?>

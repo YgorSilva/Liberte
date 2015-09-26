@@ -16,21 +16,29 @@
 			$userData = $user->getData();
 			
 			include 'template/userHeader.php';
+			include 'template/navBar.php';
+			include 'template/actionBar.php';
 		?>
 		<div id="inner-content">
-			<form id="materia-form" method="POST" enctype="multipart/form-data">
+			<form id="cover-form" method="POST" enctype="multipart/form-data">
 				<img onclick='changeCover()' class='materia capa' src='http://localhost/Liberte/images/capa_default.png' width='50%'/>
 				<input class='fileBtn' type='file' name='capa'/>
 			</form>
+			<form id="materia-form" method="POST" enctype="multipart/form-data">
 				<div id="elmt-content">
 					<div class="materia titulo" style="text-align: center;" id="titulo" onclick="editH(this);" already='false'>Nova matéria</div>
 					<div class="materia subtitulo" style="text-align: center;" id="subtitulo" onclick="editH(this);" already='false'>Sub-titulo</div>
 					<textarea id="conteudo" name="conteudo" rows="20" cols="20"></textarea>
 				</div>
 				<center>
-					<input type="button" onclick='enviar();' value="Enviar matéria"/>
-					<input type="button" onclick='enviar(1);' value="Salvar matéria"/>
+					<div id='tagInputDiv'>
+						<input type='text' class='materia tagInput' name='tagInput[0]' placeholder='Adcione uma tag'/>
+						<input type='button' class='tagControls' id='tagAdd' value='+'/>
+					</div>
+					<input type="button" onclick='enviar();' value="Publicar"/>
+					<input type="button" onclick='enviar(1);' value="Salvar como rascunho"/>
 				</center>
+			</form>
 		</div>
 		<script src="tinymce\js\tinymce\tinymce.js" type="text/javascript"></script>
 		<script>tinymce.init({selector:'textarea'});</script>

@@ -22,9 +22,8 @@
 		 	include 'template/actionBar.php';
 		 	include 'template/gridContainer.php'; 
 		?>
-		<script src="js/getFeed.js" type="text/javascript"></script>
+		<script src="js/getSearchResult.js" type="text/javascript"></script>
 		<script src="js/setVote.js" type="text/javascript"></script>
-		<script src="js/setRecomendacao.js" type="text/javascript"></script>
 		<?php include 'PHP/endConnect.php'; ?>
 	</body>
 </html>

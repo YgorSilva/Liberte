@@ -1,8 +1,37 @@
 $(function(){
+	var GET =  window.location.href.split('s=')[1].split('%20').join(' '),
+	getTag = function(str, ind){
+		var i = ind;
+		while(str.substr(i, 1) != ' ' && i < str.length) i++;
+		return str.substring(ind+1, i);
+	},
+	eraseWord = function(fStr, subStr){
+		var i = fStr.search(subStr);
+		fStr = fStr.replace(subStr, '');
+		return fStr.replace('  ', ' ');
+	},
+	getSearchData = function(str){
+		var tags = [], tag;
+		while(str.search('#') > 0){		
+			tag = getTag(str, str.search('#'));
+			str = eraseWord(str, '#'+tag);
+			tags[tags.length] = tag;
+		}
+		strSplit = [];
+		str.split(' ').forEach(function(self){
+			if(!self == '') strSplit[strSplit.length] = self;
+		});
+		return [str, strSplit, tags];
+	};
+	var searchData = getSearchData(GET);
+	console.log(searchData);
 	$.ajax({
-		url: 'PHP/getFeed.php',
+		url: 'PHP/getSearchResult.php',
+		method: 'POST',
+		data: {'fullText': searchData[0], 'words': searchData[1], 'tags': searchData[2]}
 	})
 	.success(function(xml){
+		console.log(xml);
 		var posts = $(xml).find('post'), i = 0, index = [-1], post;
 		var constructPostBox = function(posts, i){
 			post = $(posts)[i];

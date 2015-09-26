@@ -31,7 +31,7 @@ $(function(){
 				var materia = $('<a/>').attr('href', 'materia.php?matId='+matId).text($('materia', this).text());
 				
 				var action = $(this).attr('type') == 'aprove'?'aprovou':'desaprovou';
-				var text = $('<p/>').append(name, ' '+action+' sua materia: ', materia);
+				var text = $('<p/>').append(name, ' ', action+' sua materia: ', materia);
 			}
 			else if($(this).attr('type') == 'subscription'){	
 				var email = $('subscriber', this).attr('email');

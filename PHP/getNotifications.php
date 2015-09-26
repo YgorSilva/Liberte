@@ -1,9 +1,11 @@
 <?php
 	include 'connect.php';
 	include 'C:/xampp/htdocs/Liberte/PHPClasses/userClass.php';
+	include 'C:/xampp/htdocs/Liberte/PHPClasses/dateClass.php';
 
 	$user = unserialize($_SESSION['user']);
 	$userData = $user->getData();
+	$date = new Date();
 
 	$xml = '<?xml version="1.0" encoding="utf-8"?>';
 	$xml .= '<notifications>';
@@ -41,6 +43,7 @@
 	$rs = mysql_query($sql);
 	echo mysql_error();
 	while($row = mysql_fetch_array($rs)){
+		$date->setSqlDate($row['date']);
 		if($row['type'] == 'vote'){
 			$type = $row['id']?'aprove':'desaprove';
 			$visualized = $row['visualized'] ? 1 : 0;
@@ -48,7 +51,7 @@
 			$xml .= '<notification type="'.$type.'" visualized="'.$visualized.'">';
 			$xml .= '<sender email="'.$row['autor'].'">'.$row['autorName'].'</sender>';
 			$xml .= '<materia id="'.$row['materia'].'">'.$row['titulo'].'</materia>';
-			$xml .= '<date>'.$row['date'].'</date>';
+			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 			$xml .= '</notification>';
 		}
 		else if($row['type'] == 'comment'){
@@ -58,7 +61,7 @@
 			$xml .= '<sender email="'.$row['autor'].'">'.$row['autorName'].'</sender>';
 			$xml .= '<materia id="'.$row['materia'].'">'.$row['titulo'].'</materia>';
 			$xml .= '<content>'.$row['conteudo'].'</content>';
-			$xml .= '<date>'.$row['date'].'</date>';
+			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 			$xml .= '</notification>';
 		}
 		else if($row['type'] == 'subscription'){
@@ -66,7 +69,7 @@
 			
 			$xml .= '<notification type="subscription" visualized="'.$visualized.'">';
 			$xml .= '<subscriber email="'.$row['autor'].'">'.$row['autorName'].'</subscriber>';
-			$xml .= '<date>'.$row['date'].'</date>';
+			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 			$xml .= '</notification>';
 		}
 		else if($row['type'] == 'reply'){
@@ -76,7 +79,7 @@
 			$xml .= '<sender email="'.$row['autor'].'">'.$row['autorName'].'</sender>';
 			$xml .= '<comment matId="'.$row['materia'].'">'.$row['titulo'].'</comment>';
 			$xml .= '<content>'.$row['conteudo'].'</content>';
-			$xml .= '<date>'.$row['date'].'</date>';
+			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 			$xml .= '</notification>';
 		}
 		else if($row['type'] == 'commentVote'){	
@@ -86,7 +89,7 @@
 			$xml .= '<notification type="'.$type.'" visualized="'.$visualized.'">';
 			$xml .= '<sender email="'.$row['autor'].'">'.$row['autorName'].'</sender>';
 			$xml .= '<materia id="'.$row['materia'].'">'.$row['titulo'].'</materia>';
-			$xml .= '<date>'.$row['date'].'</date>';
+			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 			$xml .= '</notification>';
 		}
 		else if($row['type'] == 'denuncia'){
@@ -95,7 +98,7 @@
 			$xml .= '<notification type="denuncia" visualized="'.$visualized.'">';
 			$xml .= '<denuncia>'.$row['id'].'</denuncia>';
 			$xml .= '<materia id="'.$row['materia'].'">'.$row['titulo'].'</materia>';
-			$xml .= '<date>'.$row['date'].'</date>';
+			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 			$xml .= '</notification>';
 		}
 	}
@@ -103,7 +106,7 @@
 	$xml .= '</notifications>';
 	echo $xml;
 
-	$sql = 'update aprovarDesaprovar set visualized = 1 where materia in '.$materias;
+	/*$sql = 'update aprovarDesaprovar set visualized = 1 where materia in '.$materias;
 	mysql_query($sql);
 	$sql = 'update comentarios set visualized = 1 where materia in '.$materias;
 	mysql_query($sql);
@@ -112,7 +115,7 @@
 	$sql = 'update commentsVotes set visualized = 1 where commentId in '.$comentarios;
 	mysql_query($sql);
 	$sql = 'update juriSelecionado set visualized = 1 where usuario = "'.$userData['email'].'"';
-	mysql_query($sql);
+	mysql_query($sql);*/
 
 	header("Content-type: xml: encoding=UTF-8");
 	include 'endConnect.php';

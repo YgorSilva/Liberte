@@ -13,9 +13,10 @@
 			$id = $_GET['matId'];
 			if(isset($_SESSION['user'])){
 				include 'C:\xampp\htdocs\Liberte\PHPClasses\userClass.php';
+				include 'C:\xampp\htdocs\Liberte\PHPClasses\dateClass.php';
 				$user = unserialize($_SESSION['user']);
 				$userData = $user->getData();
-				include 'template/userHeader.php';				
+				include 'template/userHeader.php';
 
 				$already = 'if(
 					(select count(*) from aprovarDesaprovar where usuario = "'.$userData['email'].'" and materia = a.idMateria) = 0, 
@@ -28,11 +29,14 @@
 				$desaproves = '(select count(*) from aprovarDesaprovar where not isPositivo and materia = a.idMateria) as desaproves';
 				$sql = 'select a.*, '.$already.', '.$authorName.', '.$aproves.', '.$aproves.', '.$desaproves.' from materias as a where idMateria = "'.$id.'"';
 				$mat = mysql_fetch_array(mysql_query($sql));
+				$date = new Date();
+				$date->setSqlDate($mat['date']);
 			}
 			else{
 				include 'template/header.php';
 			}
 			include 'template/navBar.php';
+			include 'template/actionBar.php';
 		?>
 		<div id='inner-content'>
 			<div id="materia-content">
@@ -41,10 +45,10 @@
 						<img class='authorImg' src='layoutImages/PHFeh.jpg' width='30px' height='30px'/>
 						<div><?=$mat['authorName']?></div>
 					</div></a>
-					<h5 style='float: right;'><?=$mat['date']?></h5>
+					<h5 style='float: right; margin-bottom: 0;'><?=$date->getDisplayableDate()?></h5>
 				</div>
-				<img id='cover' src="images/<?=$mat['capa']?>" style="width: 80%; margin-left: 10%;"/>
 				<h1><?=$mat['titulo']?></h1>
+				<img id='cover' src="images/<?=$mat['capa']?>" style="width: 80%; margin-left: 10%;"/>
 				<h3><?=$mat['subtitulo']?></h3>
 				<span id="content"><?=$mat['conteudo']?></span>
 				<?php

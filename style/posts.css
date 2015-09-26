@@ -40,9 +40,11 @@
 	float: left;
 	padding: 2px;
 	border-radius: 19px;
+	border: 1px solid rgba(0, 0, 0, 0);
 }
 .authorDiv:hover{
 	background: rgba(0, 0, 0, 0.8);
+	border: 1px solid #444;
 }
 .authorDiv div{
 	margin: 0;
@@ -86,8 +88,20 @@
 	vertical-align: super;
 	margin-right: 10px;
 }
+.postDate{
+	float: left;
+	margin-top: 8px;
+	margin-left: 8px;
+	color: #666;
+	font-size: 13px;
+	font-weight: normal;
+	vertical-align: initial;
+}
 .btnRecomendar{
 	background-image: url('http://localhost/Liberte/layoutImages/recomendar.png');	
+}
+.btnRecomendado{
+	background-image: url('http://localhost/Liberte/layoutImages/recomendado.png');	
 }
 .btnAprovar{
 	background-image: url('http://localhost/Liberte/layoutImages/aprovar.png');

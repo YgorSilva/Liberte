@@ -6,8 +6,6 @@
 		private $sobrenome;
 		private $genero;
 		private $dtNasc;
-		private $cidade;
-		private $estado;
 		private $imgPerfil;
 
 		public function feedData($email){
@@ -21,8 +19,6 @@
 			$this->genero = $reg['genero'];
 			$this->dtNasc = $reg['dtNasc'];
 			$this->imgPerfil = $reg['imgPerfil'];
-			$this->cidade = $reg['cidade'];
-			$this->estado = $reg['estado'];
 			return $rs;
 		}
 
@@ -33,9 +29,7 @@
 						'sobrenome' => $this->sobrenome, 
 						'genero' => $this->genero, 
 						'dtNasc' => $this->dtNasc, 
-						'imgPerfil' => $this->imgPerfil, 
-						'cidade' => $this->cidade, 
-						'estado' => $this->estado];
+						'imgPerfil' => $this->imgPerfil];
 			return $dataArray;
 		}
 
@@ -60,7 +54,7 @@
 			$dtA = substr($dt, 6, 4);
 			$dtNasc = $dtA.'-'.$dtM.'-'.$dtD;
 			$sql = 'insert usuario value("'.$_POST["email"].'","'.$_POST["senha"].'","'.$_POST["nome"].'","'.$_POST["sobrenome"].'","'.$_POST["genero"].'",'.
-				'"'.$dtNasc.'","'.$_POST["cidade"].'","'.$_POST["estado"].'","'.$imgPerfil.'")';
+				'"'.$dtNasc.'","'.$imgPerfil.'")';
 			$rs = mysql_query($sql);
 			return $rs;
 		}

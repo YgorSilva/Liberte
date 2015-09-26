@@ -23,6 +23,9 @@
 			$subtitulo = $reg['subtitulo'];
 			$conteudo = $reg['conteudo'];
 			$isRascunho = $reg['isRascunho'];	
+			
+			include 'template/navBar.php'; 
+			include 'template/actionBar.php'; 
 		?>
 		<div id="inner-content">
 			<form id="materia-form" method="POST" enctype="multipart/form-data">
@@ -39,7 +42,6 @@
 			</center>
 			</form>
 		</div>
-		<?php include 'template/footer.php'; ?>
 		<script src="js/menu-bar.js" type="text/javascript"></script>
 		<script src="js/escrever.js" type="text/javascript"></script>
 		<script src="tinymce\js\tinymce\tinymce.js" type="text/javascript"></script>

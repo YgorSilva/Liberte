@@ -39,7 +39,7 @@
 	font-style: italic;
 	font-size: 18px;
 }
-input[type="text"]{
+.materia input[type='text']{
 	background: rgba(0,0,0,0);
 	border: 0;
 	width: 90%
@@ -47,7 +47,52 @@ input[type="text"]{
 input[type="file"]{
 	margin-bottom: 10px;
 }
-input[type="button"]{
+#tagInputDiv{
+	margin-bottom: 10px;
+}
+.tagInput{
+	width: 110px;
+	font-size: 13px;
+	text-align: center;
+	padding: 3px;
+}
+.done{
+	border-radius: 16px;
+	background: #f77;
+	color: white;
+}
+.done:hover{
+	background: #f77;
+	color: white;
+}
+.tagControls{
+	border: 1px solid rgba(0, 0, 0, .4);
+	border-radius: 100%;
+	margin-left: 5px;
+	text-align: center;
+	font-size: 14px; 
+	font-weight: bolder;
+	color: white;
+	cursor: pointer;
+}
+#tagAdd{
+	background: #7c6;
+}
+input[value='Publicar'], 
+input[value='Salvar como rascunho']{
+	border: 1px solid rgba(0, 0, 0, .4);
+	border-radius: 15px;
+	padding: 5px 15px;
+	color: white;
+	font-weight: bolder;
+}
+input[value='Publicar']{
+	background: #7c6;
+}
+input[value='Salvar como rascunho']{
+	background: #c76;
+}
+.readyBtn{
 	float: right;
 	margin-right: -80px;
 }

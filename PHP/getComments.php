@@ -1,11 +1,14 @@
 <?php 
 	include 'connect.php';
 	include 'C:\xampp\htdocs\Liberte\PHPClasses\userClass.php';
+	include 'C:\xampp\htdocs\Liberte\PHPClasses\dateClass.php';
 
 	if(isset($_SESSION['user'])){
 		$user = unserialize($_SESSION['user']);
 		$userData = $user->getData();
 	}
+	$date = new Date();
+	
 	$xml = '<?xml version="1.0" encoding="utf-8"?>';
 	$xml .= '<comments>';
 
@@ -28,10 +31,11 @@
 			$replies .= '<reply id="'.$reply['id'].'">';
 
 			$already = !is_null($reply['vote']);
-			
+			$date->setSqlDate($reply['date']);
+
 			$replies .= '<reply_author email="'.$reply['autor'].'">'.$reply['autorName'].'</reply_author>';	
 			$replies .= '<reply_content>'.$reply['conteudo'].'</reply_content>';
-			$replies .= '<reply_date>'.$reply['date'].'</reply_date>';
+			$replies .= '<reply_date>'.$date->getDisplayableDate().'</reply_date>';
 			$replies .= '<votes><reply_positive already="'.($already?$reply['vote']:0).'">'.$reply['aproves'].'</reply_positive>';
 			$replies .= '<reply_negative already="'.($already?($reply['vote']-1)*-1:0).'">'.$reply['desaproves'].'</reply_negative></votes>';
 			$replies .= '</reply>';
@@ -41,10 +45,11 @@
 		$xml .= '<comment id="'.$row['id'].'">';
 		
 		$already = !is_null($row['vote']);
+		$date->setSqlDate($row['date']);
 
 		$xml .= '<author email="'.$row['autor'].'">'.$row['autorName'].'</author>';	
 		$xml .= '<content>'.$row['conteudo'].'</content>';
-		$xml .= '<date>'.$row['date'].'</date>';
+		$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 		$xml .= '<votes><positive already="'.($already?$row['vote']:0).'">'.$row['aproves'].'</positive>';
 		$xml .= '<negative already="'.($already?($row['vote']-1)*-1:0).'">'.$row['desaproves'].'</negative></votes>';
 		$xml .= $replies;

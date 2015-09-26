@@ -5,21 +5,6 @@
 	$user = unserialize($_SESSION['user']);
 	$userData = $user->getData();
 
-
-	if(isset($_GET['u'])){
-		$id = $_GET['id'];
-		$sql = 'select capa from materias where idMateria = '.$id; 
-		$capaDefault = mysql_fetch_array(mysql_query($sql))[0];
-	}
-	else $capaDefault = 'capa_default.png';
-
-	if($_FILES["capa"]['error']==0){
-		$ext = substr($_FILES["capa"]["name"], strpos(strrev($_FILES["capa"]["name"]),".")*-1);
-		$capa = md5(time().$_FILES["capa"]["name"]).".".$ext;
-		move_uploaded_file($_FILES["capa"]["tmp_name"], "C:/xampp/htdocs/Liberte/images/".$capa);
-	}
-	else $capa = $capaDefault;
-
 	$conteudo = $_POST['conteudo'];
 	for($i = 0; $i < strlen($conteudo); $i++){
 		if($conteudo[$i] == "'" || $conteudo[$i] == '"'){
@@ -33,23 +18,30 @@
 
 	$isRascunho = $_GET['r']?1:0;
 	$link = $_GET['r']?'rascunho.php':'materia.php';
-	
+
 	if($_GET['u']){
-		$sql = 'update materias set capa = "'.$capa.'", titulo = "'.$_POST['titulo'].'", subtitulo = "'.$_POST['subtitulo'].'", 
+		$sql = 'update materias set capa = "'.$_POST['cover'].'", titulo = "'.$_POST['titulo'].'", subtitulo = "'.$_POST['subtitulo'].'", 
 		conteudo = "'.$conteudo.'", isRascunho = '.$isRascunho.' where idMateria = '.$id;
+		
+		foreach($_POST['tagInput'] as $tag){
+			$tags[] = 'update tags set tag = "'.$tag.'" where materia = .'.$id;
+		}
+		$rs = mysql_query($sql);
 	}
 	else{
 		$sql = 'insert materias (autor, capa, titulo, subtitulo, conteudo, isRascunho)'.
-		' values("'.$userData['email'].'","'.$capa.'","'.$_POST['titulo'].'","'.$_POST['subtitulo'].'","'.$conteudo.'",'.$isRascunho.')';
-	
-		if($capaDefault != "capa_default.png" and $capa != $capaDefault){
-			unlink("images/".$capaDefault);
+		' values("'.$userData['email'].'","'.$_POST['cover'].'","'.$_POST['titulo'].'","'.$_POST['subtitulo'].'","'.$conteudo.'",'.$isRascunho.')';
+		
+		$rs = mysql_query($sql);
+		$id = mysql_insert_id();
+		foreach($_POST['tagInput'] as $tag){
+			echo $tag;
+			$tags[] = 'insert tags values("'.$tag.'", '.$id.')';
 		}
 	}
-	$rs = mysql_query($sql);
-	$id = $id?$id:mysql_insert_id();
+	foreach($tags as $tag){
+		mysql_query($tag);
+	}
 	
-	if($rs) echo '<meta http-equiv="refresh" content="0;URL=/Liberte/'.$link.'?matId='.$id.'">';
-	else echo '<meta http-equiv="refresh" content="0;URL=escrever_materia.php';
 	include 'endConnect.php';
 ?>
