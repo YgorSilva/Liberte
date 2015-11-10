@@ -10,35 +10,35 @@
 	$xml = '<?xml version="1.0" encoding="utf-8"?>';
 	$xml .= '<notifications>';
 	
-	$materias = '(select idMateria from materias where autor = "'.$userData['email'].'")';
-	$comentarios = '(select id from comentarios where autor ="'.$userData['email'].'")';
-	$commentAutorName = '(select concat(nome, " ", sobrenome) from usuarios where email = a.autor)';
-	$voteAutorName = '(select concat(nome, " ", sobrenome) from usuarios where email = a.usuario)';
+	$materias = '(select idMateria from materias where autor = '.$userData['id'].')';
+	$comentarios = '(select id from comentarios where autor ='.$userData['id'].')';
+	$commentAutorName = '(select concat(nome, " ", sobrenome) from usuarios where userid = a.autor)';
+	$voteAutorName = '(select concat(nome, " ", sobrenome) from usuarios where userid = a.usuario)';
 	$titulo = '(select titulo from materias where idMateria = a.materia)';
 	$replyOf = '(select conteudo from comentarios where id = a.replyOf)';
 	$voteOf = '(select conteudo from comentarios where id = a.commentId)';
-	$subscriber = '(select concat(nome, " ", sobrenome) from usuarios where email = a.assinante)';
+	$subscriber = '(select concat(nome, " ", sobrenome) from usuarios where userid = a.assinante)';
 	$materia = '(select materia from denuncias where id = a.denuncia)';
 	$tituloDenuncia = '(select titulo from materias where idMateria = '.$materia.')';
 
 	$sql = 'select * from
 			(select "comment" as `type`, id, conteudo, autor, '.$commentAutorName.' as autorName, materia, '.$titulo.' as titulo, `date`, visualized 
-				from comentarios as a where materia in '.$materias.' and autor <> "'.$userData['email'].'" and replyOf = 0) 
+				from comentarios as a where materia in '.$materias.' and autor <> '.$userData['id'].' and replyOf = 0) 
 			as a union
 			(select "vote" as `type`, isPositivo, null, usuario, '.$voteAutorName.', materia, '.$titulo.', `date`, visualized 
-				from aprovarDesaprovar as a where materia in '.$materias.' and usuario <> "'.$userData['email'].'")
+				from aprovarDesaprovar as a where materia in '.$materias.' and usuario <> '.$userData['id'].')
 			union
 			(select "subscription" as `type`, null, null, assinante, '.$subscriber.', null, null, `date`, visualized 
-				from assinaturas as a where assinado = "'.$userData['email'].'")
+				from assinaturas as a where assinado = '.$userData['id'].')
 			union
 			(select "reply" as `type`, replyOf, conteudo, autor, '.$commentAutorName.', materia, '.$replyOf.', `date`, visualized 
-				from comentarios as a where replyOf in '.$comentarios.' and autor <> "'.$userData['email'].'")
+				from comentarios as a where replyOf in '.$comentarios.' and autor <> '.$userData['id'].')
 			union
 			(select "commentVote" as `type`, isPositive, null, usuario, '.$voteAutorName.', commentId , '.$voteOf.', `date`, visualized 
-				from commentsVotes as a where commentId in '.$comentarios.' and usuario <> "'.$userData['email'].'")
+				from commentsVotes as a where commentId in '.$comentarios.' and usuario <> '.$userData['id'].')
 			union
 			(select "denuncia" as `type`, denuncia, null, usuario, null, '.$materia.', '.$tituloDenuncia.', `date`, visualized 
-				from juriSelecionado as a where usuario = "'.$userData['email'].'")
+				from juriSelecionado as a where usuario = '.$userData['id'].')
 			order by `date` desc limit 5;';
 	$rs = mysql_query($sql);
 	echo mysql_error();
@@ -49,7 +49,7 @@
 			$visualized = $row['visualized'] ? 1 : 0;
 			
 			$xml .= '<notification type="'.$type.'" visualized="'.$visualized.'">';
-			$xml .= '<sender email="'.$row['autor'].'">'.$row['autorName'].'</sender>';
+			$xml .= '<sender id="'.$row['autor'].'">'.$row['autorName'].'</sender>';
 			$xml .= '<materia id="'.$row['materia'].'">'.$row['titulo'].'</materia>';
 			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 			$xml .= '</notification>';
@@ -58,7 +58,7 @@
 			$visualized = $row['visualized'] ? 1 : 0;
 			
 			$xml .= '<notification type="comment" visualized="'.$visualized.'">';
-			$xml .= '<sender email="'.$row['autor'].'">'.$row['autorName'].'</sender>';
+			$xml .= '<sender id="'.$row['autor'].'">'.$row['autorName'].'</sender>';
 			$xml .= '<materia id="'.$row['materia'].'">'.$row['titulo'].'</materia>';
 			$xml .= '<content>'.$row['conteudo'].'</content>';
 			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
@@ -68,7 +68,7 @@
 			$visualized = $row['visualized'] ? 1 : 0;
 			
 			$xml .= '<notification type="subscription" visualized="'.$visualized.'">';
-			$xml .= '<subscriber email="'.$row['autor'].'">'.$row['autorName'].'</subscriber>';
+			$xml .= '<subscriber id="'.$row['autor'].'">'.$row['autorName'].'</subscriber>';
 			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 			$xml .= '</notification>';
 		}
@@ -76,7 +76,7 @@
 			$visualized = $row['visualized'] ? 1 : 0;
 			
 			$xml .= '<notification type="reply" visualized="'.$visualized.'">';
-			$xml .= '<sender email="'.$row['autor'].'">'.$row['autorName'].'</sender>';
+			$xml .= '<sender id="'.$row['autor'].'">'.$row['autorName'].'</sender>';
 			$xml .= '<comment matId="'.$row['materia'].'">'.$row['titulo'].'</comment>';
 			$xml .= '<content>'.$row['conteudo'].'</content>';
 			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
@@ -87,7 +87,7 @@
 			$visualized = $row['visualized'] ? 1 : 0;
 			
 			$xml .= '<notification type="'.$type.'" visualized="'.$visualized.'">';
-			$xml .= '<sender email="'.$row['autor'].'">'.$row['autorName'].'</sender>';
+			$xml .= '<sender id="'.$row['autor'].'">'.$row['autorName'].'</sender>';
 			$xml .= '<materia id="'.$row['materia'].'">'.$row['titulo'].'</materia>';
 			$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 			$xml .= '</notification>';

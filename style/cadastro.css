@@ -1,44 +1,77 @@
-#inner-content form li{
-	margin: 0 0 10px;
-	float: none;
+body{
+	background: url(http://localhost/Liberte/layoutImages/bg.jpg);
+	background-size: 100% 100%;
+	color: white;
 }
-ul, li{
-	padding: 0;
+#form-content{
+	width: 500px;
+	margin: auto;
+	margin-top: 100px;
+	padding-top: 10px;
+	background: rgba(0, 0, 0, 0.8);
+	border-radius: 33px 33px 0 33px;
+}
+img{
+	margin-left: 218px;
+	width: 60px;
+	height: 60px;
+	border: 2px solid rgba(0, 0, 0, 0);
+	border-radius: 33px;
+	cursor: pointer;
+}
+img:hover{
+	border: 2px solid #fff;
+}
+p.errMss{
 	margin: 0;
-	list-style: none; 
+	padding: 0;
+	text-align: center;
+	font-size: 13px;
+	color: red;
+}
+.fileBtn{
+	height: 0;
+	width: 0;
+}
+.messenge{
+	margin: 0;
+	padding: 0;
+	color: white;
+	text-align: center;
+}
+input[name='email']{
+	margin-top: 10px;
+}
+input[type='radio']{
+	margin-left: 0;
+	width: initial;
+}
+input{
+	width: 200px;
+	margin-left: 150px;
+	margin-top: 5px;
 }
 label{
-	display: block;
+	margin-left: 150px;
+}
+button{
+	background: #7c6;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	border-radius: 15px;
+	padding: 5px 15px;
+	color: white;
+	font-weight: bolder;
+	width: 120px;
+	margin-left: 190px;
+	margin-top: 5px;
+	margin-bottom: 8px;
 	cursor: pointer;
-	margin: 0 0 2px;
 }
-form li div{
-	float: left;
-	margin:0 10px 0 0;
+a{
+	text-decoration: none;
+	color: white;
+	font-size: 14px;
 }
-
-.form-content input[type="text"], input[type="password"]{
-	border-radius: 5px;
-}
-
-.clear{
-	clear: both;
-	float: none;
-}
-.form-content{
-	border: 1px dotted #444;
-	padding: 10px;
-	border-radius: 0 0 20px 20px;
-	background: linear-gradient(#f0f0f6, #f6f6ff);
-}
-.form-content.header{
-	border-bottom: 0;
-	border-radius: 20px 20px 0 0;
-	background: linear-gradient(#f6f6ff, #f0f0f6);
-}
-.form_content input[type="submit"]{
-	margin-top: 10px;
-	border-radius: 5px;
-	border: 1px outset #666;
-	background: #fff;
+a:hover{
+	text-decoration: underline;
 }

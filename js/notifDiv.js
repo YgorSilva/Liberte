@@ -7,10 +7,11 @@ $(function(){
 				{'border': '1px solid rgba(50, 50, 50, 0.4)',
 				'border-bottom': '0px'});
 			$('.notifContent').show();
+			$('.notifCount').text('');
 		}
 		else{
 			$(this).attr('src', 'http://localhost/Liberte/layoutImages/notifBtn.png')
-			.prop('showing', false).css('border', '1px solid rgba(0, 0, 0, 0)');
+			.prop('showing', false).css('border', '1px solid rgba(50, 50, 50, 0)');
 			$('.notifContent').hide();
 		}
 	})

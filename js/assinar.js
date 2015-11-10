@@ -1,25 +1,16 @@
-var assinar = function(signed, isSigning){
-	var	isSigning = isSigning === undefined? 1: isSigning;
-
+var assinar = function(signed){
+	var user = window.location.search.split('e=')[1], 
+	nspan = $('span.userData')[1];
 	$.ajax({
 		url: 'PHP/assinar.php', 
-		method: 'POST', 
-		data: {signed: signed, isSigning: isSigning}
+		method: 'POST',
+		data: {'signed': signed, 'user': user}
 	})
-	.success(function(response){
-		console.log(response);
-		if(response && isSigning){
-			console.log($("#btnAssinar").val());
-			$("#btnAssinar").val('Assinado');
-			btnAssinar.onclick = function(){
-				assinar(signed, 0);
-			}
-		}
-		else if(response){
-			$("#btnAssinar").val('Assinar');
-			btnAssinar.onclick = function(){
-				assinar(signed);
-			}	
-		}
+	.success(function(rs){
+		$(".signingBtn").text(signed?'Assinar':'Assinado')
+		.attr({'class': 'signingBtn '+(signed?'':'already'),
+			'onclick': 'assinar('+(!signed)+');'
+		});
+		$(nspan).text(parseInt($(nspan).text())+(signed?-1:1));
 	})	
 }

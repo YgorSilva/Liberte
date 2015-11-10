@@ -1,7 +1,7 @@
 <?php
 	Class Date{
-		private $sqlDate = array('year' => '', 'month' => '', 'day' => '', 'hour' => '', 'minutes' => '', 'seconds' => '');
-		private $now = array('year' => '', 'month' => '', 'day' => '', 'hour' => '', 'minutes' => '', 'seconds' => '');
+		private $sqlDate = array('years' => '', 'months' => '', 'days' => '', 'hours' => '', 'minutes' => '', 'seconds' => '');
+		private $now = array('years' => '', 'months' => '', 'days' => '', 'hours' => '', 'minutes' => '', 'seconds' => '');
 		private $monthSize = array(1 => 31, 2 => 28, 3 => 31, 4 => 30, 5 => 31, 6 => 30, 7 => 31, 8 => 31, 9 => 30, 10 => 31, 11 => 30, 12 => 31);
 		private $monthName = array(
 			'01' => 'jan.', 
@@ -16,6 +16,13 @@
 			'10' => 'out.', 
 			'11' => 'nov.', 
 			'12' => 'dez.');
+
+		function __construct($sqlDate = '0000-00-00 00:00:00'){
+			if($this->isSQLDate($sqlDate)){
+				$this->setDateFields($sqlDate, false);
+			}
+			$this->setDateFields($this->getNowDate(), true);
+		}
 
 		private function isSQLDate($date){
 			if(strlen($date) == 19){
@@ -40,34 +47,33 @@
 		}
 
 		private function setDateFields($date, $now){
-			if($now) $this->now['year'] = substr($date, 0, 4); 
-			else $this->sqlDate['year'] = substr($date, 0, 4);
+			if($now) $this->now['years'] = substr($date, 0, 4); 
+			else $this->sqlDate['years'] = substr($date, 0, 4);
 			$keys = array_keys($this->sqlDate);
 			$j = 5;
 			for($i = 1; $i < sizeof($this->sqlDate); $i++){
-				if($now) $this->now[$keys[$i]] = substr($date, $j, 2);
-				 
+				if($now) $this->now[$keys[$i]] = substr($date, $j, 2);		 
 				else $this->sqlDate[$keys[$i]] = substr($date, $j, 2);
 				$j += 3;
 			}
 		}
 
 		private function getMillenniumDate($arr){
-			$mllDt['year'] = intval($arr['year'])-2001;
-			$mllDt['month'] = intval($arr['month'])+($mllDt['year']*12);
-			$mllDt['day'] = intval($arr['day']);
+			$mllDt['years'] = intval($arr['years'])-2001;
+			$mllDt['months'] = intval($arr['months'])+($mllDt['years']*12);
+			$mllDt['days'] = intval($arr['days']);
 			$mth = 1;
 			$year = 2001;
-			for($i = 1; $i <= $mllDt['month']; $i++){
-				$mllDt['day'] += $this->monthSize[$mth++];
+			for($i = 1; $i <= $mllDt['months']; $i++){
+				$mllDt['days'] += $this->monthSize[$mth++];
 				if($mth == 13){
 					$mth = 1;
-					if($this->isBissextile($year)) $mllDt['day']++;
+					if($this->isBissextile($year)) $mllDt['days']++;
 					$year++;
 				} 
 			}
-			$mllDt['hour'] = intval($arr['hour'])+($mllDt['day']*24);
-			$mllDt['minutes'] = intval($arr['minutes'])+($mllDt['hour']*60);
+			$mllDt['hours'] = intval($arr['hours'])+($mllDt['days']*24);
+			$mllDt['minutes'] = intval($arr['minutes'])+($mllDt['hours']*60);
 			$mllDt['seconds'] = intval($arr['seconds'])+($mllDt['minutes']*60);
 			return $mllDt;
 		}
@@ -76,7 +82,7 @@
 			return $year%4 == 0 && ($year%100 != 0 || $year%400 == 0);
 		}
 
-		private function getFieldDiff($field){
+		public function getFieldDiff($field){
 			$mllSqlDate = $this->getMillenniumDate($this->sqlDate);
 			$mllNow = $this->getMillenniumDate($this->now);
 			foreach($mllNow as $key => $value){
@@ -91,7 +97,7 @@
 		}
 
 		public function getFullDate(){
-			return $this->sqlDate['day'].' de '.$this->monthName[$this->sqlDate['month']].' às '.$this->sqlDate['hour'].':'.$this->sqlDate['minutes'];
+			return $this->sqlDate['days'].' de '.$this->monthName[$this->sqlDate['months']].' às '.$this->sqlDate['hours'].':'.$this->sqlDate['minutes'];
 		}
 
 		public function setSqlDate($date){
@@ -103,16 +109,13 @@
 		}
 
 		public function getDisplayableDate(){
-			if($this->sqlDate['year'] == '') return 'Erro: Não foi setada nenhuma data';
+			if($this->sqlDate['years'] == '') return 'Erro: Não foi setada nenhuma data';
 			else{
 				$this->setDateFields($this->getNowDate(), true);
 				$diff = $this->getFieldDiff(false);
-				if($diff['year'] || $diff['month'] || $diff['hour'] >= 48){
-					return $this->getFullDate();
-				}
-				else if($diff['hour'] >= 24){
-					return 'Ontem às '.$this->sqlDate['hour'].':'.$this->sqlDate['minutes'];		
-				}
+				if($diff['years'] || $diff['months'] || $diff['days'] > 1) return $this->getFullDate();
+				else if($diff['days'] == 1 && $diff['hours'] >= 2)
+					return 'Ontem às '.$this->sqlDate['hours'].':'.$this->sqlDate['minutes'];		
 				else if($diff['minutes'] >= 60){
 					$hour = intval($diff['minutes']/60);
 					return 'Há '.$hour.' hora'.($hour>1?'s':'');				
@@ -121,9 +124,7 @@
 					$minutes = intval($diff['seconds']/60);
 					return 'Há '.$minutes.' minuto'.($minutes>1?'s':'');				
 				}
-				else{
-					return 'Agora mesmo';
-				}
+				else return 'Agora mesmo';
 			}
 		}
 	}

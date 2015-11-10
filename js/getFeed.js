@@ -3,8 +3,15 @@ $(function(){
 		url: 'PHP/getFeed.php',
 	})
 	.success(function(xml){
-		var posts = $(xml).find('post'), i = 0, index = [-1], post;
-		var constructPostBox = function(posts, i){
+		var posts = $(xml).find('post'), i = 0, post,
+		getSmallestGrid = function(){
+			var smallest = $('#grid1');
+			for(var i = 2; i <= 3; i++){
+				smallest = $('#grid'+i).height() < $(smallest).height()? $('#grid'+i): smallest;
+			}
+			return $(smallest);
+		},
+		constructPostBox = function(posts, i){
 			post = $(posts)[i];
 			var id = $(post).attr('id');
 			var url = 'materia.php?matId='+$(post).attr('id');
@@ -24,11 +31,11 @@ $(function(){
 				$('<a/>').append(
 					$('<div/>').addClass('authorDiv').append(
 						$('<img/>')
-						.attr({'src': 'layoutImages/PHFeh.jpg', 
+						.attr({'src': 'images/'+$('authorImg', post).text(), 
 								'width': '30px', 'height': '30px'}).addClass('authorImg'),
 						$('<div/>').text($('author', post).text()).hide()
 					)
-				).attr('href', 'user.php?email='+$('author', post).attr('email')),
+				).attr('href', 'user.php?id='+$('author', post).attr('id')),
 				title
 			);
 			
@@ -55,16 +62,16 @@ $(function(){
 					$('<button/>').addClass('btnDesaprova'+(desaprovarAlready?'do':'r'))
 					.attr('title', 'Desaprova'+(desaprovarAlready?'do':'r'))
 					.click(function(){
-						setVote(this, id, 0, $(this).prop('isUndoing'));
-					}).prop('isUndoing', desaprovarAlready),
+						setVote(this, id, 0, $(this).prop('isUndoing'), $(this).prop('isUpdating'));
+					}).prop({'isUndoing': desaprovarAlready, 'isUpdating': aprovarAlready}),
 					$('<span/>').addClass('nDesaprovar').text($('desaprovar', post).text())
 				),
 				$('<div/>').append(
 					$('<button/>').addClass('btnAprova'+(aprovarAlready?'do':'r'))
 					.attr('title', 'Aprova'+(aprovarAlready?'do':'r'))
 					.click(function(){
-						setVote(this, id, 1, $(this).prop('isUndoing'));
-					}).prop('isUndoing', aprovarAlready),
+						setVote(this, id, 1, $(this).prop('isUndoing'), $(this).prop('isUpdating'));
+					}).prop({'isUndoing': aprovarAlready, 'isUpdating': desaprovarAlready}),
 					$('<span/>').addClass('nAprovar').text($('aprovar', post).text())
 				)
 			);
@@ -144,11 +151,4 @@ $(function(){
 		};
 		constructPostBox(posts, i);
 	});
-	var getSmallestGrid = function(){
-		var smallest = $('#grid1');
-		for(var i = 2; i <= 3; i++){
-			smallest = $('#grid'+i).height() < $(smallest).height()? $('#grid'+i): smallest;
-		}
-		return $(smallest);
-	}
 });

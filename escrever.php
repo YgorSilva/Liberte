@@ -6,15 +6,10 @@
 		<link rel="stylesheet" type="text/css" href="style/liberte.css"/>
 		<link rel="stylesheet" type="text/css" href="style/escrever.css"/>
 		<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
-		<script src="js/jquery.form-3.46.0.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<script src="js/escrever.js" type="text/javascript"></script>
 		<?php 
-			include 'C:\xampp\htdocs\Liberte\PHPClasses\userClass.php';
-			$user = unserialize($_SESSION['user']);
-			$userData = $user->getData();
-			
 			include 'template/userHeader.php';
 			include 'template/navBar.php';
 			include 'template/actionBar.php';

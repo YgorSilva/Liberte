@@ -1,0 +1,59 @@
+body{
+	background: url(http://localhost/Liberte/layoutImages/loginbg.jpeg);
+	background-size: 100% 100%;
+	font-family: Century Gothic;
+}
+p.about{
+	float: left;
+	width: 300px;
+	background: rgba(0, 0, 0, 0.8);
+	color: white;
+	padding: 20px;
+	font-size: 18px;
+	margin-top: 0;
+	border-radius: 30px 30px 30px 0;
+}
+#loginDiv{
+	width: 300px;
+	height: 180px;
+	margin: auto;
+	margin-top: 12.5%;
+	padding-top: 10px;
+	background: rgba(0, 0, 0, 0.8);
+	border-radius: 30px 30px 0 30px;
+}
+.messenge{
+	margin: 0;
+	padding: 0;
+	color: white;
+	text-align: center;
+}
+input[name='email']{
+	margin-top: 25px;
+}
+input{
+	width: 160px;
+	margin-left: 70px;
+	margin-top: 5px;
+}
+button.login{
+	background: #7c6;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	border-radius: 15px;
+	padding: 5px 15px;
+	color: white;
+	font-weight: bolder;
+	width: 80px;
+	margin-left: 110px;
+	margin-top: 5px;
+	margin-bottom: 8px;
+	cursor: pointer;
+}
+a{
+	text-decoration: none;
+	color: white;
+	font-size: 14px;
+}
+a:hover{
+	text-decoration: underline;
+}

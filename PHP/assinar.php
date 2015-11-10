@@ -5,8 +5,8 @@
 	$user = unserialize($_SESSION['user']);
 	$userData = $user->getData();
 
-	if($_POST['isSigning']) $sql = 'insert assinaturas (assinante, assinado) values ("'.$userData['email'].'","'.$_POST['signed'].'")';
-	else $sql = 'delete from assinaturas where assinante = "'.$userData['email'].'" and assinado = "'.$_POST['signed'].'"';
+	if(!$_POST['signed']) $sql = 'insert assinaturas (assinante, assinado) values ("'.$userData['id'].'","'.$_POST['user'].'")';
+	else $sql = 'delete from assinaturas where assinante = "'.$userData['id'].'" and assinado = "'.$_POST['user'].'"';
 	$rs = mysql_query($sql);
 	echo $rs? true:false;
 

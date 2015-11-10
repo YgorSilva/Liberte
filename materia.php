@@ -11,30 +11,22 @@
 	<body>
 		<?php 
 			$id = $_GET['matId'];
-			if(isset($_SESSION['user'])){
-				include 'C:\xampp\htdocs\Liberte\PHPClasses\userClass.php';
-				include 'C:\xampp\htdocs\Liberte\PHPClasses\dateClass.php';
-				$user = unserialize($_SESSION['user']);
-				$userData = $user->getData();
-				include 'template/userHeader.php';
+			include 'C:\xampp\htdocs\Liberte\PHPClasses\dateClass.php';
+			include 'template/userHeader.php';
 
-				$already = 'if(
-					(select count(*) from aprovarDesaprovar where usuario = "'.$userData['email'].'" and materia = a.idMateria) = 0, 
-					NULL, 
-					(select isPositivo from aprovarDesaprovar 
-					where usuario = "'.$userData['email'].'" and materia = a.idMateria)) 
-					as already';
-				$authorName = '(select concat(nome, " ", sobrenome) from usuarios where email = a.autor) as authorName';
-				$aproves = '(select count(*) from aprovarDesaprovar where isPositivo and materia = a.idMateria) as aproves';
-				$desaproves = '(select count(*) from aprovarDesaprovar where not isPositivo and materia = a.idMateria) as desaproves';
-				$sql = 'select a.*, '.$already.', '.$authorName.', '.$aproves.', '.$aproves.', '.$desaproves.' from materias as a where idMateria = "'.$id.'"';
-				$mat = mysql_fetch_array(mysql_query($sql));
-				$date = new Date();
-				$date->setSqlDate($mat['date']);
-			}
-			else{
-				include 'template/header.php';
-			}
+			$already = 'if(
+				(select count(*) from aprovarDesaprovar where usuario = '.$userData['id'].' and materia = a.idMateria) = 0, 
+				NULL, 
+				(select isPositivo from aprovarDesaprovar 
+				where usuario = '.$userData['id'].' and materia = a.idMateria)) 
+				as already';
+			$authorName = '(select concat(nome, " ", sobrenome) from usuarios where userid = a.autor) as authorName';
+			$aproves = '(select count(*) from aprovarDesaprovar where isPositivo and materia = a.idMateria) as aproves';
+			$desaproves = '(select count(*) from aprovarDesaprovar where not isPositivo and materia = a.idMateria) as desaproves';
+			$sql = 'select a.*, '.$already.', '.$authorName.', '.$aproves.', '.$aproves.', '.$desaproves.' from materias as a where idMateria = "'.$id.'"';
+			$mat = mysql_fetch_array(mysql_query($sql));
+			$date = new Date();
+			$date->setSqlDate($mat['date']);
 			include 'template/navBar.php';
 			include 'template/actionBar.php';
 		?>
@@ -52,7 +44,7 @@
 				<h3><?=$mat['subtitulo']?></h3>
 				<span id="content"><?=$mat['conteudo']?></span>
 				<?php
-					if(@$userData['email'] == $mat['autor']) echo '<a class="sub" href="editar.php?matId='.$id.'">Editar</a>';
+					if($userData['id'] == $mat['autor']) echo '<a class="sub" href="editar.php?matId='.$id.'">Editar</a>';
 					else{
 						echo '<a href="user.php?e='.$mat['autor'].'"><h6>por '.$mat['authorName'].'</h6></a>';
 						echo '<a onclick="setDenuncia(this)"><h6>Denunciar</h6></a>';

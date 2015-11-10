@@ -20,6 +20,8 @@ h1, h3{
 #interact{
 	width: 60%;
 	margin: auto;
+	padding-top: 20px;
+	border-top: 2px solid rgba(50, 50, 50, 0.4);
 }
 .n{
 	vertical-align: super;

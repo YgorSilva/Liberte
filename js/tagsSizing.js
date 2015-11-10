@@ -1,6 +1,6 @@
 $(function(){
-	var nchars, li;
-	var tagSize = $('#nav ul li').width(), tags = $('#nav ul li a');
+	var nchars, li,
+	tagSize = $('#nav ul li').width(), tags = $('#nav ul li a');
 	$(tags).each(function(){
 		nchars = $(this).text().length;
 		li = $(this).parents()[0];
@@ -9,7 +9,7 @@ $(function(){
 		}
 		while($(this).width() > tagSize){
 			$(this).css('font-size', parseInt($(this).css('font-size'))-1);
-			$(li).css('margin-top', parseInt($(li).css('margin-top'))+1);
+			$(li).css('margin-top', (parseFloat($(li).css('margin-top'))+0.5)+'px');
 		}
 	});
 });

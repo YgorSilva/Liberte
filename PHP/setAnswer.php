@@ -4,7 +4,7 @@
 	$user = unserialize($_SESSION['user']);
 	$userData = $user->getData();
 
-	$sql = 'update juri set answer = '.$_POST['answer'].' where usuario = "'.$userData['email'].'"';
+	$sql = 'update juri set answer = '.$_POST['answer'].' where usuario = '.$userData['id'];
 	$rs = mysql_query($sql);
 	if($rs){
 		$sql = 'select a.sim, b.nao from (select count(*) as sim from juri where resposta) a 

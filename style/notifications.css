@@ -10,4 +10,6 @@
 .date{
 	text-align: right;
 	margin: 0;
+	webkit-margin-before: 0;
+	webkit-margin-after: 0;
 }

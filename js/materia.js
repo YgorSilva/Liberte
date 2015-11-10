@@ -83,8 +83,8 @@ var constructCommentBox = function(elmt, isReply){
 	if(isReply) $(div).addClass('replyComment')
 
 	var authorName = $(r+'author', elmt).text();
-	var authorEmail = $(r+'author', elmt).attr('email');
-	var authorLink = $('<a/>').attr('href' ,'user.php?e='+authorEmail).append(
+	var authorId = $(r+'author', elmt).attr('id');
+	var authorLink = $('<a/>').attr('href' ,'user.php?id='+authorId).append(
 		$('<div/>').addClass('authorDiv').append(
 			$('<img/>')
 			.attr({'src': 'layoutImages/PHFeh.jpg', 

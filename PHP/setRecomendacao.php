@@ -5,9 +5,9 @@
 	$userData = $user->getData();
 
 	if(!$_POST['isUndoing']) $sql = 'insert recomendacoes (materia, usuario) 
-		values ('.$_POST["matId"].' ,"'.$userData['email'].'")';
+		values ('.$_POST["matId"].' ,'.$userData['id'].')';
 	else $sql = 'delete from recomendacoes
-		where materia = "'.$_POST['matId'].'" and usuario = "'.$userData['email'].'"';
+		where materia = "'.$_POST['matId'].'" and usuario = '.$userData['id'];
 	$rs = mysql_query($sql);
 	echo $rs? true:false;
 

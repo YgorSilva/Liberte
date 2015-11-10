@@ -1,15 +1,13 @@
 <?php
 	include 'connect.php';
-	include 'C:/xampp/htdocs/Liberte/PHPClasses/userClass.php';
-	$user = unserialize($_SESSION['user']);
-	$userData = $user->getData();
-
+	
 	if(isset($_GET['getLastCover'])){
-		if(isset($_SESSION['cover'])) echo $_SESSION['cover'];
+		if(isset($_SESSION['cover'])){
+			echo $_SESSION['cover'];
+			unset($_SESSION['cover']);
+		} 
 		else echo false;
-		unset($_SESSION['cover']);
 	} 
-		
 	else{
 		if($_FILES["capa"]['error']==0){
 			$ext = substr($_FILES["capa"]["name"], strpos(strrev($_FILES["capa"]["name"]),".")*-1);

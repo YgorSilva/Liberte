@@ -24,8 +24,8 @@ $(function(){
 
 		$(notifs).each(function(){
 			if($(this).attr('type') == 'aprove' || $(this).attr('type') == 'desaprove'){	
-				var email = $('sender', this).attr('email');
-				var name = $('<a/>').attr('href', 'user.php?e='+email).text($('sender', this).text());
+				var userid = $('sender', this).attr('id');
+				var name = $('<a/>').attr('href', 'user.php?id='+userid).text($('sender', this).text());
 				
 				var matId = $('materia', this).attr('id');
 				var materia = $('<a/>').attr('href', 'materia.php?matId='+matId).text($('materia', this).text());
@@ -34,14 +34,14 @@ $(function(){
 				var text = $('<p/>').append(name, ' ', action+' sua materia: ', materia);
 			}
 			else if($(this).attr('type') == 'subscription'){	
-				var email = $('subscriber', this).attr('email');
-				var name = $('<a/>').attr('href', 'user.php?e='+email).text($('subscriber', this).text());
+				var userid = $('subscriber', this).attr('id');
+				var name = $('<a/>').attr('href', 'user.php?id='+userid).text($('subscriber', this).text());
 				
 				var text = $('<p/>').append(name, ' assinou você');
 			}
 			else if($(this).attr('type') == 'comment'){
-				var email = $('sender', this).attr('email');
-				var name = $('<a/>').attr('href', 'user.php?e='+email).text($('sender', this).text());
+				var userid = $('sender', this).attr('id');
+				var name = $('<a/>').attr('href', 'user.php?id='+userid).text($('sender', this).text());
 				
 				var matId = $('materia', this).attr('id');
 				var materia = $('<a/>').attr('href', 'materia.php?matId='+matId).text($('materia', this).text());
@@ -50,8 +50,8 @@ $(function(){
 				var text = $('<p/>').append(name, ' comentou tua matéria ', materia, conteudo);
 			}
 			else if($(this).attr('type') == 'commentAprove' || $(this).attr('type') == 'commentDesaprove'){
-				var email = $('sender', this).attr('email');
-				var name = $('<a/>').attr('href', 'user.php?e='+email).text($('sender', this).text());
+				var userid = $('sender', this).attr('id');
+				var name = $('<a/>').attr('href', 'user.php?id='+userid).text($('sender', this).text());
 				
 				var commentId = $('materia', this).attr('id');
 				var comment = $('<a/>').attr('href', 'materia.php?matId='+commentId).text($('materia', this).text());
@@ -60,8 +60,8 @@ $(function(){
 				var text = $('<p/>').append(name, ' '+action+' teu comentário: ', comment);	
 			}
 			else if($(this).attr('type') == 'reply'){
-				var email = $('sender', this).attr('email');
-				var name = $('<a/>').attr('href', 'user.php?e='+email).text($('sender', this).text());
+				var userid = $('sender', this).attr('id');
+				var name = $('<a/>').attr('href', 'user.php?id='+userid).text($('sender', this).text());
 				
 				var matId = $('comment', this).attr('matId');
 				var materia = $('<a/>').attr('href', 'materia.php?matId='+matId).text($('comment', this).text());
@@ -82,7 +82,7 @@ $(function(){
 			}
 			var date = $('<h5/>').text($('date', this).text()).addClass('date');
 			var div = $('<div/>').append(text, date).addClass('notificationBox');
-			if(!parseInt($(this).attr('visualized'))) $(div).css('background', '#eee');
+			if(!parseInt($(this).attr('visualized'))) $(div).css('background', 'rgba(100, 100, 100, 0.5)');
 			$('.notifContent').append(div);
 		})
 	})

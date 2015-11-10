@@ -34,13 +34,13 @@
 <div id='nav'>
 	<center><a href='index.php'><img class='menun logo' src='layoutImages/logo.png' width='200px'></a></center>
 	<ul class='leftUL'>
-		<li><a class='menun corner' href='#'><?=$tags[0]?></a></li>
-		<li><a class='menun middle' href='#'><?=$tags[1]?></a></li>
-		<li><a class='menun middle' href='#'><?=$tags[2]?></a></li>
+		<li><a class='menun corner' href='pesquisa.php?s=%2523<?=$tags[0]?>'><?=$tags[0]?></a></li>
+		<li><a class='menun middle' href='pesquisa.php?s=%2523<?=$tags[1]?>'><?=$tags[1]?></a></li>
+		<li><a class='menun middle' href='pesquisa.php?s=%2523<?=$tags[2]?>'><?=$tags[2]?></a></li>
 	</ul>
 	<ul class='rightUL'>
-		<li><a class='menun middle' href='#'><?=$tags[3]?></a></li>
-		<li><a class='menun middle' href='#'><?=$tags[4]?></a></li>
-		<li><a class='menun corner' href='#'><?=$tags[5]?></a></li>
+		<li><a class='menun middle' href='pesquisa.php?s=%2523<?=$tags[3]?>'><?=$tags[3]?></a></li>
+		<li><a class='menun middle' href='pesquisa.php?s=%2523<?=$tags[4]?>'><?=$tags[4]?></a></li>
+		<li><a class='menun corner' href='pesquisa.php?s=%2523<?=$tags[5]?>'><?=$tags[5]?></a></li>
 	</ul>
 </div>

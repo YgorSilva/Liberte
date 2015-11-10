@@ -20,6 +20,7 @@
 	$link = $_GET['r']?'rascunho.php':'materia.php';
 
 	if($_GET['u']){
+		$id = $_GET['id'];
 		$sql = 'update materias set capa = "'.$_POST['cover'].'", titulo = "'.$_POST['titulo'].'", subtitulo = "'.$_POST['subtitulo'].'", 
 		conteudo = "'.$conteudo.'", isRascunho = '.$isRascunho.' where idMateria = '.$id;
 		
@@ -30,7 +31,7 @@
 	}
 	else{
 		$sql = 'insert materias (autor, capa, titulo, subtitulo, conteudo, isRascunho)'.
-		' values("'.$userData['email'].'","'.$_POST['cover'].'","'.$_POST['titulo'].'","'.$_POST['subtitulo'].'","'.$conteudo.'",'.$isRascunho.')';
+		' values('.$userData['id'].',"'.$_POST['cover'].'","'.$_POST['titulo'].'","'.$_POST['subtitulo'].'","'.$conteudo.'",'.$isRascunho.')';
 		
 		$rs = mysql_query($sql);
 		$id = mysql_insert_id();
@@ -40,6 +41,7 @@
 		}
 	}
 	foreach($tags as $tag){
+		echo $tag;
 		mysql_query($tag);
 	}
 	

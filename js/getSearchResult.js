@@ -1,37 +1,141 @@
 $(function(){
-	var GET =  window.location.href.split('s=')[1].split('%20').join(' '),
-	getTag = function(str, ind){
+	var GET =  decodeURIComponent(decodeURI(window.location.search.split('s=')[1])),
+	getSmallestGrid = function(){
+		var smallest = $('#grid1');
+		for(var i = 2; i <= 3; i++){
+			smallest = $('#grid'+i).height() < $(smallest).height()? $('#grid'+i): smallest;
+		}
+		return $(smallest);
+	},
+	getWord = function(str, ind){
 		var i = ind;
-		while(str.substr(i, 1) != ' ' && i < str.length) i++;
-		return str.substring(ind+1, i);
+		while(str[i] != ' ' && i < str.length) i++;
+		return str.substring(ind, i);
 	},
 	eraseWord = function(fStr, subStr){
 		var i = fStr.search(subStr);
 		fStr = fStr.replace(subStr, '');
 		return fStr.replace('  ', ' ');
 	},
+	toBLOB = function(str){
+		var utf8Chars = ['á','à','ã','â','é','è','ê','í','ì','î','ó','ò','ô','õ','ú','ù'],
+		blobChars =  ['&aacute;','&agrave;','&atilde;','&acirc;','&eacute;','&egrave;','&ecirc;','&iacute;','&igrave;','&icirc;','&oacute;','&ograve;','&ocirc;','&otilde;','&uacute;','&ugrave;'],
+		defaultLength = utf8Chars.length, arr = [];
+
+		for(i = 0; i < defaultLength; i++){
+			utf8Chars[utf8Chars.length] = utf8Chars[i].toUpperCase();
+			blobChars[blobChars.length] = blobChars[i].replace(blobChars[i][1], blobChars[i][1].toUpperCase());
+		}
+		utf8Chars = utf8Chars.concat(['ç', '<', '>', '&']);
+		blobChars = blobChars.concat(['&ccedil;', '&lt;', '&gt;', '&amp;']);
+		if(typeof str == 'string'){
+			var i = 0;
+			while(i < str.length){
+				if(utf8Chars.indexOf(str[i])+1){
+					ind = utf8Chars.indexOf(str[i]);
+					str = str.replace(utf8Chars[ind], blobChars[ind]);
+					i += blobChars[ind].length;
+				} 
+				else i++;
+			}
+		}
+		else if(typeof str == 'object'){
+			str.forEach(function(self){ arr[arr.length] = toBLOB(self);})
+			str = arr;
+		}
+		return str;
+	},
+	followTag = function(btn){
+		var span = $('span', 'div.tagData', $('.tagInfo', $(btn).parents()))[1], 
+		isUndoing = $(btn).attr('class') == 'unfollowTag'?1:0, 
+		tag = $(btn).siblings().text();
+		$.ajax({
+			url: 'PHP/followTag.php',
+			method: 'POST',
+			data: {'tag': tag, 'isUndoing': isUndoing}
+		})
+		.success(function(rs){
+			if(rs){
+				$(btn).text(isUndoing?'Assinar':'Assinado')
+				.attr('class', isUndoing? 'followTag':'unfollowTag');
+				$(span).text(parseInt($(span).text())+(isUndoing?-1:1));
+			}
+		});
+	},
+	showTags = function(tags){
+		$.ajax({
+			url: 'PHP/getTags.php',
+			method: 'POST',
+			data: {'tags': tags}
+		})
+		.success(function(xml){
+			console.log(xml);
+			$(xml).find('tag').each(function(){
+				$('#tagDiv').append(
+					$('<div/>').addClass('tagInfo').append(
+						$('<div/>').addClass('tagCell').append(
+							$('<a/>').addClass('tag').text($('text', this).text())
+							.attr('href', 'pesquisa.php?s=%2523'+$('text', this).text()),
+							$('<button/>').addClass(parseInt($(this).attr('followed'))?'unfollowTag':'followTag')
+							.text(parseInt($(this).attr('followed'))?'Assinado':'Assinar')
+							.click(function(){
+								followTag(this);
+							})
+						),
+						$('<div/>').addClass('tagCell').append(
+							$('<div/>').addClass('tagData').append(
+								$('<span/>').addClass('tagData').text($('assinantesAss', this).text()),
+								$('<br/>'),
+								$('<button/>').addClass('tagData').text('Pessoas que você assina')
+							),
+							$('<div/>').addClass('tagData').append(
+								$('<span/>').addClass('tagData').text($('assinantes', this).text()),
+								$('<br/>'),
+								$('<button/>').addClass('tagData').text('Assinantes')
+							),
+							$('<div/>').addClass('tagData').append(
+								$('<span/>').addClass('tagData').text($('publicacoes', this).text()),
+								$('<br/>'),
+								$('<button/>').addClass('tagData').text('Publicações')
+							)
+						)
+					)
+				);
+			})
+		});
+	},
 	getSearchData = function(str){
-		var tags = [], tag;
-		while(str.search('#') > 0){		
-			tag = getTag(str, str.search('#'));
+		var tags = [], tag, 
+		strSplit = [], strSplitL = [], strSplitUp = [];
+		while(str.search('#') >= 0){		
+			tag = getWord(str, str.search('#')+1);
 			str = eraseWord(str, '#'+tag);
 			tags[tags.length] = tag;
 		}
-		strSplit = [];
+		showTags(tags);
 		str.split(' ').forEach(function(self){
-			if(!self == '') strSplit[strSplit.length] = self;
+			if(self != '' && self != ' '){
+				strSplit[strSplit.length] = self;
+			} 
 		});
-		return [str, strSplit, tags];
-	};
-	var searchData = getSearchData(GET);
-	console.log(searchData);
+
+		return [str, strSplit, tags, toBLOB(str), toBLOB(strSplit)];
+	},
+	searchData = getSearchData(GET);
+
+	$('.searchBar').val(GET);
 	$.ajax({
 		url: 'PHP/getSearchResult.php',
 		method: 'POST',
-		data: {'fullText': searchData[0], 'words': searchData[1], 'tags': searchData[2]}
+		data: {
+			'fullText': searchData[0] != ' '? searchData[0]:'', 
+			'words': searchData[1].length > 0?searchData[1]:0, 
+			'tags': searchData[2].length > 0?searchData[2]:0,
+			'blobText': searchData[3] != ' '?searchData[3]:'',
+			'blobWords': searchData[4] !== undefined?searchData[4]:0
+		}
 	})
 	.success(function(xml){
-		console.log(xml);
 		var posts = $(xml).find('post'), i = 0, index = [-1], post;
 		var constructPostBox = function(posts, i){
 			post = $(posts)[i];
@@ -57,7 +161,7 @@ $(function(){
 								'width': '30px', 'height': '30px'}).addClass('authorImg'),
 						$('<div/>').text($('author', post).text()).hide()
 					)
-				).attr('href', 'user.php?email='+$('author', post).attr('email')),
+				).attr('href', 'user.php?id='+$('author', post).attr('id')),
 				title
 			);
 			
@@ -84,16 +188,16 @@ $(function(){
 					$('<button/>').addClass('btnDesaprova'+(desaprovarAlready?'do':'r'))
 					.attr('title', 'Desaprova'+(desaprovarAlready?'do':'r'))
 					.click(function(){
-						setVote(this, id, 0, $(this).prop('isUndoing'));
-					}).prop('isUndoing', desaprovarAlready),
+						setVote(this, id, 0, $(this).prop('isUndoing'), $(this).prop('isUpdating'));
+					}).prop({'isUndoing': desaprovarAlready, 'isUpdating': aprovarAlready}),
 					$('<span/>').addClass('nDesaprovar').text($('desaprovar', post).text())
 				),
 				$('<div/>').append(
 					$('<button/>').addClass('btnAprova'+(aprovarAlready?'do':'r'))
 					.attr('title', 'Aprova'+(aprovarAlready?'do':'r'))
 					.click(function(){
-						setVote(this, id, 1, $(this).prop('isUndoing'));
-					}).prop('isUndoing', aprovarAlready),
+						setVote(this, id, 1, $(this).prop('isUndoing'), $(this).prop('isUpdating'));
+					}).prop({'isUndoing': aprovarAlready, 'isUpdating': desaprovarAlready}),
 					$('<span/>').addClass('nAprovar').text($('aprovar', post).text())
 				)
 			);
@@ -173,11 +277,4 @@ $(function(){
 		};
 		constructPostBox(posts, i);
 	});
-	var getSmallestGrid = function(){
-		var smallest = $('#grid1');
-		for(var i = 2; i <= 3; i++){
-			smallest = $('#grid'+i).height() < $(smallest).height()? $('#grid'+i): smallest;
-		}
-		return $(smallest);
-	}
 });

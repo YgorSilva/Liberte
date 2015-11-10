@@ -7,7 +7,7 @@
 	$userData = $user->getData();
 
 	$sql = 'insert comentarios (autor, conteudo, materia, replyOf) 
-			values("'.$userData['email'].'", "'.$_POST['content'].'", '.$_POST['id'].', '.$_POST['replyOf'].')';
+			values('.$userData['id'].', "'.$_POST['content'].'", '.$_POST['id'].', '.$_POST['replyOf'].')';
 	$rs = mysql_query($sql);
 
 	if($rs){
@@ -18,7 +18,7 @@
 		$date->setSqlDate($row['date']);
 
 		$xml = '<comment id="'.$id.'">';
-		$xml .= '<author email="'.$row['autor'].'">'.$userData['nome'].' '.$userData['sobrenome'].'</author>';	
+		$xml .= '<author id="'.$row['autor'].'">'.$userData['nome'].' '.$userData['sobrenome'].'</author>';	
 		$xml .= '<content>'.$row['conteudo'].'</content>';
 		$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 		$xml .= '<votes><positive already="0">0</positive>';

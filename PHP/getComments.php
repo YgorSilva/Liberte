@@ -12,10 +12,10 @@
 	$xml = '<?xml version="1.0" encoding="utf-8"?>';
 	$xml .= '<comments>';
 
-	$autorName = '(select concat(nome, " ", sobrenome) from usuarios where email = a.autor)';
+	$autorName = '(select concat(nome, " ", sobrenome) from usuarios where userid = a.autor)';
 	$aproves = '(select count(*) from commentsVotes where isPositive and commentId = a.id)';
 	$desaproves = '(select count(*) from commentsVotes where not isPositive and commentId = a.id)';
-	$vote = '(select isPositive from commentsVotes where usuario = "'.$userData['email'].'" and commentId = a.id)';
+	$vote = '(select isPositive from commentsVotes where usuario = '.$userData['id'].' and commentId = a.id)';
 	
 	$sql = 'select a.*, '.$autorName.' as autorName, '.$aproves.' as aproves, '.$desaproves.' as desaproves, '.$vote.' as vote
 			from comentarios as a
@@ -33,7 +33,7 @@
 			$already = !is_null($reply['vote']);
 			$date->setSqlDate($reply['date']);
 
-			$replies .= '<reply_author email="'.$reply['autor'].'">'.$reply['autorName'].'</reply_author>';	
+			$replies .= '<reply_author id="'.$reply['autor'].'">'.$reply['autorName'].'</reply_author>';	
 			$replies .= '<reply_content>'.$reply['conteudo'].'</reply_content>';
 			$replies .= '<reply_date>'.$date->getDisplayableDate().'</reply_date>';
 			$replies .= '<votes><reply_positive already="'.($already?$reply['vote']:0).'">'.$reply['aproves'].'</reply_positive>';
@@ -47,7 +47,7 @@
 		$already = !is_null($row['vote']);
 		$date->setSqlDate($row['date']);
 
-		$xml .= '<author email="'.$row['autor'].'">'.$row['autorName'].'</author>';	
+		$xml .= '<author id="'.$row['autor'].'">'.$row['autorName'].'</author>';	
 		$xml .= '<content>'.$row['conteudo'].'</content>';
 		$xml .= '<date>'.$date->getDisplayableDate().'</date>';
 		$xml .= '<votes><positive already="'.($already?$row['vote']:0).'">'.$row['aproves'].'</positive>';

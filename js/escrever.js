@@ -16,8 +16,6 @@ var editH = function(elmt){
 },
 
 changeCover = function(){
-	var files;
-
 	$('.fileBtn').click()
 	.change(function(){
 		$('body').append(

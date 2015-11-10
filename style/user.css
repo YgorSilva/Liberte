@@ -1,0 +1,55 @@
+#userPerfil{
+	margin: auto;
+	width: 990px;
+	height: 180px;
+	border-bottom: 2px solid rgba(50, 50, 50, 0.4);
+}
+img.user{
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+}
+a.user{
+	font-family: 'navFont';
+	font-size: 25px;
+	font-weight: bold;
+}
+#userData{
+	float: left;
+	width: 420px;
+	height: 50px;
+}
+div.userData{
+	float: left;
+	width: 140px;
+	text-align: center;
+	margin-top: 120px;
+}
+.userData{
+	font-size: 25px;
+	color: #545454;
+	font-weight: bold;
+}
+div.userData button{
+	font-size: 15px;
+}
+div.userData button, .signingBtn{
+	background: #385DAB;
+	border: 0;
+	border-radius: 8px;
+	padding: 1px 8px 2px;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+}
+.already{
+	background: #CC333B;
+}
+.signingBtn{
+	margin-top: 8px;
+	font-size: 18px;
+}
+#userMain{
+	float: left;
+	width: 190px;
+}
