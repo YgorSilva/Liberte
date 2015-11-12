@@ -25,6 +25,7 @@ $(function(){
 			.success(function(rs){
 				if(rs == 1) window.location.reload();
 				else $('.messenge').text('Usuário e/ou senha inválidos');
+				console.log(rs);
 			});
 		}
 		else $('.messenge').text('Usuário e/ou senha inválidos');
