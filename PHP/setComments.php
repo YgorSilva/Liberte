@@ -1,7 +1,7 @@
 <?php 
-	include 'connect.php';
-	include 'C:\xampp\htdocs\Liberte\PHPClasses\userClass.php';
-	include 'C:\xampp\htdocs\Liberte\PHPClasses\dateClass.php';
+	include '/PHP/connect.php';
+	include '/PHPClasses/userClass.php';
+	include '/PHPClasses/dateClass.php';
 
 	$user = unserialize($_SESSION['user']);
 	$userData = $user->getData();
@@ -28,5 +28,5 @@
 	}
 	else echo false;
 
-	include 'endConnect.php';
+	include '/PHP/endConnect.php';
 ?>

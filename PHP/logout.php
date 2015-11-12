@@ -1,7 +1,7 @@
 <?php
-	include 'connect.php';
+	include '/PHP/connect.php';
 
 	session_destroy();
 
-	include 'endConnect.php';
+	include '/PHP/endConnect.php';
 ?>

@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '/PHP/connect.php';
 
 	if(isset($_GET['getLastImg'])){
 		if(isset($_SESSION['perfil'])){
