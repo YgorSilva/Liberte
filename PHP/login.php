@@ -1,6 +1,6 @@
 <?php
-	include '/PHP/connect.php';
-	include '/PHPClasses/userClass.php';
+	include 'PHP/connect.php';
+	include 'PHPClasses/userClass.php';
 	
 	$user = new User();
 	$try = $user->login($_POST['email'], $_POST['senha']);
