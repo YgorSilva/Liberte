@@ -1,6 +1,6 @@
 <?php
-	include 'PHP/connect.php';
-	include 'PHPClasses/userClass.php';
+	include 'liberte.890m.com/PHP/connect.php';
+	include 'liberte.890m.com/PHPClasses/userClass.php';
 	
 	$user = new User();
 	$try = $user->login($_POST['email'], $_POST['senha']);
@@ -9,5 +9,5 @@
 		$_SESSION['user'] = serialize($user);
 		echo 1;
 	}
-	include '/PHP/endConnect.php';
+	include 'liberte.890m.com/PHP/endConnect.php';
 ?>
