@@ -64,7 +64,7 @@ $(function(){
 	},
 	showTags = function(tags){
 		$.ajax({
-			url: 'PHP/getTags.php',
+			url: '/PHP/getTags.php',
 			method: 'POST',
 			data: {'tags': tags}
 		})
@@ -125,7 +125,7 @@ $(function(){
 
 	$('.searchBar').val(GET);
 	$.ajax({
-		url: 'PHP/getSearchResult.php',
+		url: '/PHP/getSearchResult.php',
 		method: 'POST',
 		data: {
 			'fullText': searchData[0] != ' '? searchData[0]:'', 

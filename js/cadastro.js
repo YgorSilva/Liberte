@@ -5,7 +5,7 @@ var set  = function(){
 	dia = $('select[name="dia"]').val(), mes = $('select[name="mes"]').val(), ano = $('select[name="ano"]').val();
 	if(!errors.length){
 		$.ajax({
-			url: 'PHP/setUser.php',
+			url: '/PHP/setUser.php',
 			method: 'POST',
 			data: {'email': email, 'senha': senha, 'nome': nome, 'sNome': sNome, 
 				'genero': genero, 'dia': dia, 'mes': mes, 'ano': ano, 'perfilImg': img
@@ -66,7 +66,7 @@ getPerfilImg = (function(){
 	var i = 0;
 	var returnedFunction = function(){
 		$.ajax({
-			url: 'PHP/setPerfilImg.php',
+			url: '/PHP/setPerfilImg.php',
 			method: 'GET',
 			data: {'getLastImg': '1'}
 		})

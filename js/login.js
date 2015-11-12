@@ -18,7 +18,7 @@ $(function(){
 	$('button').click(function(){
 		if(!hasError()){
 			$.ajax({
-				url: 'PHP/login.php',
+				url: '/PHP/login.php',
 				method: 'POST',
 				data: {'email': $('input[name="email"]').val(), 'senha': $('input[name="senha"]').val()}
 			})
