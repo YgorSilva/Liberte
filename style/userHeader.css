@@ -9,7 +9,7 @@
 	height: 80px;
 	margin-top: 10px;
 	margin-left: 25%; 
-	background: url('http://localhost/Liberte/layoutImages/perfil_div.png');
+	background: url('/layoutImages/perfil_div.png');
 	background-repeat: none;
 	background-size: 100% 100%;
 }

@@ -98,20 +98,20 @@
 	vertical-align: initial;
 }
 .btnRecomendar{
-	background-image: url('http://localhost/Liberte/layoutImages/recomendar.png');	
+	background-image: url('/layoutImages/recomendar.png');	
 }
 .btnRecomendado{
-	background-image: url('http://localhost/Liberte/layoutImages/recomendado.png');	
+	background-image: url('/layoutImages/recomendado.png');	
 }
 .btnAprovar{
-	background-image: url('http://localhost/Liberte/layoutImages/aprovar.png');
+	background-image: url('/layoutImages/aprovar.png');
 }
 .btnAprovado{
-	background-image: url('http://localhost/Liberte/layoutImages/aprovado.png');
+	background-image: url('/layoutImages/aprovado.png');
 }
 .btnDesaprovar{
-	background-image: url('http://localhost/Liberte/layoutImages/desaprovar.png');	
+	background-image: url('/layoutImages/desaprovar.png');	
 }
 .btnDesaprovado{
-	background-image: url('http://localhost/Liberte/layoutImages/desaprovado.png');
+	background-image: url('/layoutImages/desaprovado.png');
 }

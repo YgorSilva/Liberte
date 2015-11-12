@@ -5,7 +5,7 @@
 	width: 100%;
 	height: 120px;
 	margin-top: -10px;
-	background: url('http://localhost/Liberte/layoutImages/faixa.png');
+	background: url('/layoutImages/faixa.png');
 	background-repeat: none;
 	background-size: 100% 100%;
 }

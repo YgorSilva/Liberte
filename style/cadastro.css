@@ -1,5 +1,5 @@
 body{
-	background: url(http://localhost/Liberte/layoutImages/bg.jpg);
+	background: url(/layoutImages/bg.jpg);
 	background-size: 100% 100%;
 	color: white;
 }

@@ -1,11 +1,11 @@
 @font-face{
 	font-family: "navFont";
-	src: url(http://localhost/liberte/gladifilthefte.ttf);
+	src: url(/gladifilthefte.ttf);
 } 
 body{
 	padding: 0;
 	margin: 0;
-	background: url('http://localhost/Liberte/layoutImages/gridbg.jpg');
+	background: url('/layoutImages/gridbg.jpg');
 	background-repeat: no-repeat;
 	background-size: 990px;
 	background-position: 0 260px;
