@@ -9,5 +9,6 @@
 		$_SESSION['user'] = serialize($user);
 		echo 1;
 	}
+	else echo 'Errrou';
 	include '../PHP/endConnect.php';
 ?>
