@@ -1,5 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `liberte` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
-USE `liberte`;
+USE `u925071396_lbt`;
 -- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
 -- Host: 127.0.0.1    Database: liberte
