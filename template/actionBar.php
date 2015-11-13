@@ -7,7 +7,7 @@
 	<div id='searchBox'>
 		<input class='searchBar' type='text' name='search' placeholder='Pesquisar'></input>
 		<div id='searchBtn'>
-			<img src='layoutImages/Pesquisa.png' title='Pesquisar' height='25px'>
+			<img src='layoutImages/pesquisa.png' title='Pesquisar' height='25px'>
 		</div>
 	</div>
 	<div class='notifDiv'>

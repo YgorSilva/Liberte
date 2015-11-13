@@ -13,9 +13,9 @@
 	$xml .= '<comments>';
 
 	$autorName = '(select concat(nome, " ", sobrenome) from usuarios where userid = a.autor)';
-	$aproves = '(select count(*) from commentsVotes where isPositive and commentId = a.id)';
-	$desaproves = '(select count(*) from commentsVotes where not isPositive and commentId = a.id)';
-	$vote = '(select isPositive from commentsVotes where usuario = '.$userData['id'].' and commentId = a.id)';
+	$aproves = '(select count(*) from commentsvotes where isPositive and commentId = a.id)';
+	$desaproves = '(select count(*) from commentsvotes where not isPositive and commentId = a.id)';
+	$vote = '(select isPositive from commentsvotes where usuario = '.$userData['id'].' and commentId = a.id)';
 	
 	$sql = 'select a.*, '.$autorName.' as autorName, '.$aproves.' as aproves, '.$desaproves.' as desaproves, '.$vote.' as vote
 			from comentarios as a

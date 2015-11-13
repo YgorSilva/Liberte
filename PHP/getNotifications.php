@@ -38,7 +38,7 @@
 				from commentsVotes as a where commentId in '.$comentarios.' and usuario <> '.$userData['id'].')
 			union
 			(select "denuncia" as `type`, denuncia, null, usuario, null, '.$materia.', '.$tituloDenuncia.', `date`, visualized 
-				from juriSelecionado as a where usuario = '.$userData['id'].')
+				from juriselecionado as a where usuario = '.$userData['id'].')
 			order by `date` desc limit 5;';
 	$rs = mysql_query($sql);
 	echo mysql_error();
@@ -114,7 +114,7 @@
 	mysql_query($sql);
 	$sql = 'update commentsVotes set visualized = 1 where commentId in '.$comentarios;
 	mysql_query($sql);
-	$sql = 'update juriSelecionado set visualized = 1 where usuario = "'.$userData['email'].'"';
+	$sql = 'update juriselecionado set visualized = 1 where usuario = "'.$userData['email'].'"';
 	mysql_query($sql);*/
 
 	header("Content-type: xml: encoding=UTF-8");

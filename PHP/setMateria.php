@@ -45,5 +45,5 @@
 		mysql_query($tag);
 	}
 	
-	include 'endConnect.php';
+	include '../PHP/endConnect.php';
 ?>

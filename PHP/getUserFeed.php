@@ -7,16 +7,16 @@
 	$userData = $user->getData();
 	
 	$autorRecomendacoes = '(select materia from recomendacoes where usuario = '.$_POST['user'].')';
-	$aproves = '(select count(*) from aprovarDesaprovar where isPositivo and materia = a.idMateria)';
+	$aproves = '(select count(*) from aprovardesaprovar where isPositivo and materia = a.idMateria)';
 	$recomendacoes = '(select count(*) from recomendacoes where materia = a.idMateria)';
 	$recomendou = 'IF((select count(*) from recomendacoes 
 				where materia = a.idMateria and usuario = '.$userData['id'].'), 1, 0) as recomendou';
 	$authorName = '(select concat(nome, " ", sobrenome) from usuarios where userid = a.autor) as authorName';
 	$authorImg = '(select imgPerfil from usuarios where userid = a.autor) as authorImg';
-	$aprovou = 'IF((select count(*) from aprovarDesaprovar 
+	$aprovou = 'IF((select count(*) from aprovardesaprovar 
 				where materia = a.idMateria and isPositivo and usuario = '.$userData['id'].'), 1, 0) as aprovou';
-	$desaprovar = '(select count(*) from aprovarDesaprovar where materia = a.idMateria and not isPositivo) as desaprovacoes';
-	$desaprovou = 'IF((select count(*) from aprovarDesaprovar 
+	$desaprovar = '(select count(*) from aprovardesaprovar where materia = a.idMateria and not isPositivo) as desaprovacoes';
+	$desaprovou = 'IF((select count(*) from aprovardesaprovar 
 				where materia = a.idMateria and not isPositivo and usuario = '.$userData['id'].'), 1, 0) as desaprovou';
 	$sql = 'select a.*, '.$authorName.', '.$authorImg.', '.$aproves.' as aprovacoes, 
 			'.$aprovou.', '.$desaprovar.', '.$desaprovou.', '.$recomendacoes.' as recomendacoes, '.$recomendou.' 

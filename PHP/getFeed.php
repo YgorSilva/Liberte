@@ -10,8 +10,8 @@
 	$assinadosBS = '(select assinado from assinaturas where assinante in '.$assinados.')';
 	//$tags = '(select tag from assinatura_tag where usuario = "'.$userData['emil'].'")';
 	//$matTags = '(select tag from tags where materia = a.idMateria)';
-	$aproves = '(select count(*) from aprovarDesaprovar where isPositivo and materia = a.idMateria)';
-	$aprovesBS = '((select count(*) from aprovarDesaprovar where isPositivo and materia = a.idMateria and usuario in ('.$assinados.'))*4)';
+	$aproves = '(select count(*) from aprovardesaprovar where isPositivo and materia = a.idMateria)';
+	$aprovesBS = '((select count(*) from aprovardesaprovar where isPositivo and materia = a.idMateria and usuario in ('.$assinados.'))*4)';
 	$recomendacoes = '(select count(*) from recomendacoes where materia = a.idMateria)';
 	$recomendacoesBS = '(select (count(*)*45) from recomendacoes where materia = a.idMateria and usuario in('.$assinados.'))';
 	$recomendou = 'IF((select count(*) from recomendacoes 
@@ -23,10 +23,10 @@
 		+('.$recomendacoes.'*15)+'.$recomendacoesBS.'+'.$comments.'+'.$commentsBS.'+'.$datediff.'))';
 	$authorName = '(select concat(nome, " ", sobrenome) from usuarios where userid = a.autor) as authorName';
 	$authorImg = '(select imgPerfil from usuarios where userid = a.autor) as authorImg';
-	$aprovou = 'IF((select count(*) from aprovarDesaprovar 
+	$aprovou = 'IF((select count(*) from aprovardesaprovar 
 				where materia = a.idMateria and isPositivo and usuario = '.$userData['id'].'), 1, 0) as aprovou';
-	$desaprovar = '(select count(*) from aprovarDesaprovar where materia = a.idMateria and not isPositivo) as desaprovacoes';
-	$desaprovou = 'IF((select count(*) from aprovarDesaprovar 
+	$desaprovar = '(select count(*) from aprovardesaprovar where materia = a.idMateria and not isPositivo) as desaprovacoes';
+	$desaprovou = 'IF((select count(*) from aprovardesaprovar 
 				where materia = a.idMateria and not isPositivo and usuario = '.$userData['id'].'), 1, 0) as desaprovou';
 	$sql = 'select a.*, '.$score.' as score, '.$authorName.', '.$authorImg.', '.$aproves.' as aprovacoes, 
 			'.$aprovou.', '.$desaprovar.', '.$desaprovou.', '.$recomendacoes.' as recomendacoes, '.$recomendou.' 

@@ -4,11 +4,11 @@
 	$user = unserialize($_SESSION['user']);
 	$userData = $user->getData();
 
-	if(!$_POST['isUndoing'] && !$_POST['isUpdating']) $sql = 'insert aprovarDesaprovar (materia, usuario, isPositivo) 
+	if(!$_POST['isUndoing'] && !$_POST['isUpdating']) $sql = 'insert aprovardesaprovar (materia, usuario, isPositivo) 
 		values ('.$_POST["matId"].' ,'.$userData['id'].', '.$_POST['isPositive'].')';
-	else if($_POST['isUpdating']) $sql = 'update aprovarDesaprovar set isPositivo = '.$_POST['isPositive'].'
+	else if($_POST['isUpdating']) $sql = 'update aprovardesaprovar set isPositivo = '.$_POST['isPositive'].'
 	 	where materia = '.$_POST['matId'].' and usuario = '.$userData['id'];
-	else $sql = 'delete from aprovarDesaprovar 
+	else $sql = 'delete from aprovardesaprovar 
 		where materia = '.$_POST['matId'].' and usuario = '.$userData['id'];
 	$rs = mysql_query($sql);
 	echo $rs? true:false;

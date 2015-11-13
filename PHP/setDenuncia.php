@@ -11,7 +11,7 @@
 		$denuncia = mysql_insert_id();
 		
 		$autor = '(select autor from materias where idMateria = '.$_POST['matId'].')';
-		$juriSelec = '(select usuario from juriSelecionado)';
+		$juriSelec = '(select usuario from juriselecionado)';
 		$sql = 'select userid from usuarios where userid <> '.$userData['id'].' and userid <> '.$autor.' and not userid in '.
 		$juriSelec.' limit 10';
 		$rs = mysql_query($sql);
@@ -21,7 +21,7 @@
 			$values .= ', ('.$denuncia.', "'.$row[0].'")'; 
 		}
 		
-		$sql = 'insert juriSelecionado(denuncia, usuario) values'.$values;
+		$sql = 'insert juriselecionado(denuncia, usuario) values'.$values;
 		$rs = mysql_query($sql);
 		echo true;
 	}

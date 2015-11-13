@@ -9,7 +9,7 @@
 	$comentarios = '(select id from comentarios where autor = '.$userData['id'].')';
 	$sql = 'select a.x + b.x as res
 				from 
-				(select count(*) as x from aprovarDesaprovar where not visualized and materia in '.$materias.' and usuario <> '.$userData['id'].') a
+				(select count(*) as x from aprovardesaprovar where not visualized and materia in '.$materias.' and usuario <> '.$userData['id'].') a
 				inner join 
 					(select x.x + y.x as x 
 					from 
@@ -21,9 +21,9 @@
 						inner join
 							(select x.x + y.x as x
 							from
-							(select count(*) as x from juriSelecionado where not visualized and usuario = '.$userData['id'].') x
+							(select count(*) as x from juriselecionado where not visualized and usuario = '.$userData['id'].') x
 							inner join
-							(select count(*) as x from commentsVotes where not visualized and commentId in '.$comentarios.' and usuario <> '.$userData['id'].') y) y) y) b';
+							(select count(*) as x from commentsvotes where not visualized and commentId in '.$comentarios.' and usuario <> '.$userData['id'].') y) y) y) b';
 	$rs = mysql_query($sql);
 	if($rs){	
 		$res = mysql_fetch_array($rs)[0];
