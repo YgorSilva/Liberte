@@ -1,4 +1,5 @@
-USE `u925071396_lbt`;
+CREATE DATABASE IF NOT EXISTS `liberte`;
+USE `liberte`;
 -- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
 -- Host: 127.0.0.1    Database: liberte

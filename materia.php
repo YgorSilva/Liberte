@@ -15,14 +15,14 @@
 			include 'template/userHeader.php';
 
 			$already = 'if(
-				(select count(*) from aprovarDesaprovar where usuario = '.$userData['id'].' and materia = a.idMateria) = 0, 
+				(select count(*) from aprovardesaprovar where usuario = '.$userData['id'].' and materia = a.idMateria) = 0, 
 				NULL, 
-				(select isPositivo from aprovarDesaprovar 
+				(select isPositivo from aprovarsdesaprovar 
 				where usuario = '.$userData['id'].' and materia = a.idMateria)) 
 				as already';
 			$authorName = '(select concat(nome, " ", sobrenome) from usuarios where userid = a.autor) as authorName';
-			$aproves = '(select count(*) from aprovarDesaprovar where isPositivo and materia = a.idMateria) as aproves';
-			$desaproves = '(select count(*) from aprovarDesaprovar where not isPositivo and materia = a.idMateria) as desaproves';
+			$aproves = '(select count(*) from aprovardesaprovar where isPositivo and materia = a.idMateria) as aproves';
+			$desaproves = '(select count(*) from aprovardesaprovar where not isPositivo and materia = a.idMateria) as desaproves';
 			$sql = 'select a.*, '.$already.', '.$authorName.', '.$aproves.', '.$aproves.', '.$desaproves.' from materias as a where idMateria = "'.$id.'"';
 			$mat = mysql_fetch_array(mysql_query($sql));
 			$date = new Date();
