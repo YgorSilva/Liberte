@@ -26,6 +26,7 @@
 			$desaproves = '(select count(*) from aprovardesaprovar where not isPositivo and materia = a.idMateria) as desaproves';
 			$sql = 'select a.*, '.$already.', '.$authorName.', '.$aproves.', '.$aproves.', '.$desaproves.' from materias as a where idMateria = "'.$id.'"';
 			$mat = mysql_fetch_array(mysql_query($sql));
+			echo mysql_error();
 			$date = new Date();
 			$date->setSqlDate($mat['date']);
 			include 'template/navBar.php';
