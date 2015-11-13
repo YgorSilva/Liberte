@@ -7,6 +7,7 @@
 	</head>
 	<body>
 		<?php
+			ini_set('display_errors', 'On');
 			include '../template/userHeader.php';
 		 	include '../template/navBar.php';
 		 	include '../template/actionBar.php';
