@@ -6,7 +6,7 @@ $(function(){
 		return date;
 	}
 	$.ajax({
-		url: 'PHP/getNotifications.php',
+		url: '/PHP/getNotifications.php',
 		method: 'POST',
 		data: {x: 0}
 	})
@@ -93,7 +93,7 @@ var setJurado = function(btn, answer){
 	var denuncia = $(div).prop('denuncia');
 	var matId = $(div).prop('matId');
 	$.ajax({
-		url: 'PHP/setJurado.php',
+		url: '/PHP/setJurado.php',
 		method: 'POST',
 		data: {'denuncia': denuncia, 'answer': answer, 'matId': matId}
 	})
