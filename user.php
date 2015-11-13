@@ -5,7 +5,7 @@
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" href="style/liberte.css"/>
 		<link rel="stylesheet" type="text/css" href="style/user.css"/>
-		<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
+		<script src="https://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<?php 
