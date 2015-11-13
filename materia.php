@@ -18,7 +18,7 @@
 			$already = 'if(
 				(select count(*) from aprovardesaprovar where usuario = '.$userData['id'].' and materia = a.idMateria) = 0, 
 				NULL, 
-				(select isPositivo from aprovarsdesaprovar 
+				(select isPositivo from aprovardesaprovar 
 				where usuario = '.$userData['id'].' and materia = a.idMateria)) 
 				as already';
 			$authorName = '(select concat(nome, " ", sobrenome) from usuarios where userid = a.autor) as authorName';
@@ -26,7 +26,6 @@
 			$desaproves = '(select count(*) from aprovardesaprovar where not isPositivo and materia = a.idMateria) as desaproves';
 			$sql = 'select a.*, '.$already.', '.$authorName.', '.$aproves.', '.$aproves.', '.$desaproves.' from materias as a where idMateria = "'.$id.'"';
 			$mat = mysql_fetch_array(mysql_query($sql));
-			echo mysql_error();
 			$date = new Date();
 			$date->setSqlDate($mat['date']);
 			include 'template/navBar.php';
