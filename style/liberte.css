@@ -1,6 +1,6 @@
 @font-face{
 	font-family: "navFont";
-	src: url(/gladifilthefte.ttf);
+	src: url('/gladifilthefte.ttf');
 } 
 body{
 	padding: 0;
