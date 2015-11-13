@@ -11,6 +11,7 @@
 	<body>
 		<?php 
 			$id = $_GET['matId'];
+			ini_set('display_errors', 'On');
 			include 'PHPClasses/dateClass.php';
 			include 'template/userHeader.php';
 
