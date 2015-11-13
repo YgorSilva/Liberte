@@ -1,5 +1,5 @@
 <?php 
-	include '../PHPClasses/userClass.php';
+	include './PHPClasses/userClass.php';
 	$user = unserialize($_SESSION['user']);
 	$userData = $user->getData();
 ?>
