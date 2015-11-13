@@ -1,5 +1,5 @@
 <?php
-	include '/PHP/connect.php';
+	include '../PHP/connect.php';
 	
 	if(isset($_GET['getLastCover'])){
 		if(isset($_SESSION['cover'])){

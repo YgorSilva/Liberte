@@ -1,6 +1,6 @@
 <?php
-	include '/PHP/connect.php';
-	include '/PHPClasses/userCLass.php';
+	include '../PHP/connect.php';
+	include '../PHPClasses/userCLass.php';
 	$user = unserialize($_SESSION['user']);
 	$userData = $user->getData();
 

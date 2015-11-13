@@ -1,7 +1,7 @@
 <?php
-	include '/PHP/connect.php';
-	include '/PHPClasses/userCLass.php';
-	include '/PHPClasses/dateCLass.php';
+	include '../PHP/connect.php';
+	include '../PHPClasses/userCLass.php';
+	include '../PHPClasses/dateCLass.php';
 	$user = unserialize($_SESSION['user']);
 	$userData = $user->getData();
 

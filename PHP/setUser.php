@@ -1,6 +1,6 @@
 <?php
-	include '/PHP/connect.php';
-	include '/PHPClasses/userClass.php';
+	include '../PHP/connect.php';
+	include '../PHPClasses/userClass.php';
 
 	$user = new User();
 	$rs = $user->insertData();
@@ -9,5 +9,5 @@
 		if($log) $_SESSION['user'] = serialize($user);
 	} 
 	echo $rs;
-	include 'endConnect.php';
+	include '../PHP/endConnect.php';
 ?>

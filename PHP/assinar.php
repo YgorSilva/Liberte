@@ -1,6 +1,6 @@
 <?php 
-	include '/PHP/connect.php';
-	include '/PHPClasses/userClass.php';
+	include '../PHP/connect.php';
+	include '../PHPClasses/userClass.php';
 
 	$user = unserialize($_SESSION['user']);
 	$userData = $user->getData();
@@ -10,5 +10,5 @@
 	$rs = mysql_query($sql);
 	echo $rs? true:false;
 
-	include '/PHP/endConnect.php';
+	include '../PHP/endConnect.php';
 ?>
