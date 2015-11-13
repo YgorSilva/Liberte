@@ -11,7 +11,7 @@
 	<body>
 		<?php 
 			$id = $_GET['matId'];
-			include 'C:\xampp\htdocs\Liberte\PHPClasses\dateClass.php';
+			include 'PHPClasses/dateClass.php';
 			include 'template/userHeader.php';
 
 			$already = 'if(
