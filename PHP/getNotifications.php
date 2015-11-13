@@ -26,7 +26,7 @@
 				from comentarios as a where materia in '.$materias.' and autor <> '.$userData['id'].' and replyOf = 0) 
 			as a union
 			(select "vote" as `type`, isPositivo, null, usuario, '.$voteAutorName.', materia, '.$titulo.', `date`, visualized 
-				from aprovarDesaprovar as a where materia in '.$materias.' and usuario <> '.$userData['id'].')
+				from aprovardesaprovar as a where materia in '.$materias.' and usuario <> '.$userData['id'].')
 			union
 			(select "subscription" as `type`, null, null, assinante, '.$subscriber.', null, null, `date`, visualized 
 				from assinaturas as a where assinado = '.$userData['id'].')
@@ -106,7 +106,7 @@
 	$xml .= '</notifications>';
 	echo $xml;
 
-	/*$sql = 'update aprovarDesaprovar set visualized = 1 where materia in '.$materias;
+	/*$sql = 'update aprovardesaprovar set visualized = 1 where materia in '.$materias;
 	mysql_query($sql);
 	$sql = 'update comentarios set visualized = 1 where materia in '.$materias;
 	mysql_query($sql);
