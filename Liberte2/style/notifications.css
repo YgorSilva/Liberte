@@ -1,0 +1,15 @@
+#inner-content a{
+	text-decoration: none;
+	font-weight: bold;
+	color: blue;
+}
+.notificationBox{
+	border: 1px solid #aaa;
+	padding: 10px;
+}
+.date{
+	text-align: right;
+	margin: 0;
+	webkit-margin-before: 0;
+	webkit-margin-after: 0;
+}

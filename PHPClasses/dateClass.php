@@ -66,9 +66,9 @@
 			$year = 2001;
 			for($i = 1; $i <= $mllDt['months']; $i++){
 				$mllDt['days'] += $this->monthSize[$mth++];
-				if($mth == 13){
+				if($this->isBissextile($year) && $mth == 3) $mllDt['days']++;
+				else if($mth == 13){
 					$mth = 1;
-					if($this->isBissextile($year)) $mllDt['days']++;
 					$year++;
 				} 
 			}

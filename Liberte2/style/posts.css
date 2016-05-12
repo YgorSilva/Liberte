@@ -1,0 +1,117 @@
+.postBox{
+	padding: 5px;
+	margin-bottom: 20px;
+}
+.postInfo{
+	overflow: hidden;
+	background: white;
+	border-radius: 15px 15px 0 0;
+}
+.postCover{
+	float: left;
+	width: 100%;
+}
+.postTitle a, .postSubtitle{
+	color: #ddd;
+}
+.postTitle a:hover{
+	text-decoration: underline;
+}
+.postTitle{
+	display: inline-block;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.75);
+	clear: both;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+}
+.postSubtitle{
+	text-align: left;
+	font-size: 16px;
+	padding-left: 2px;
+}
+.authorDiv{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	overflow: hidden;
+	margin-left: 2px;
+	float: left;
+	padding: 2px;
+	border-radius: 19px;
+	border: 1px solid rgba(0, 0, 0, 0);
+}
+.authorDiv:hover{
+	background: rgba(0, 0, 0, 0.8);
+	border: 1px solid #444;
+}
+.authorDiv div{
+	margin: 0;
+	margin-top: 5px;
+	color: #ddd;
+	vertical-align: super;
+	margin-left: 2px;
+	margin-right: 2px;
+	float: right;
+	font-weight: bold;
+}
+.authorImg{
+	border-radius: 15px;
+}
+.postBtns{
+	height: 30px;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	padding-right: 4px;
+	border-bottom: 2px solid rgba(50, 50, 50, 0.4);
+	border-right: 2px solid rgba(50, 50, 50, 0.2);
+	border-left: 1px solid rgba(50, 50, 50, 0.1);
+	border-radius: 0 0 0 15px;
+	background: #dfdfdf;
+}
+.postBtns div{
+	float: right;
+}
+.postBtns button{
+	cursor: pointer;
+	background-color: #ddd;
+	background-repeat: none;
+	background-size: 100% 100%;
+	width: 30px;
+	height: 30px;
+	border-radius: 18px;
+	margin-right: 5px;
+}
+.postBtns span{
+	font-weight: bold;
+	vertical-align: super;
+	margin-right: 10px;
+}
+.postDate{
+	float: left;
+	margin-top: 8px;
+	margin-left: 8px;
+	color: #666;
+	font-size: 13px;
+	font-weight: normal;
+	vertical-align: initial;
+}
+.btnRecomendar{
+	background-image: url('/layoutImages/recomendar.png');	
+}
+.btnRecomendado{
+	background-image: url('/layoutImages/recomendado.png');	
+}
+.btnAprovar{
+	background-image: url('/layoutImages/aprovar.png');
+}
+.btnAprovado{
+	background-image: url('/layoutImages/aprovado.png');
+}
+.btnDesaprovar{
+	background-image: url('/layoutImages/desaprovar.png');	
+}
+.btnDesaprovado{
+	background-image: url('/layoutImages/desaprovado.png');
+}

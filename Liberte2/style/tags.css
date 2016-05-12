@@ -1,0 +1,51 @@
+#tagDiv{
+	margin: auto;
+	width: 900px;
+}
+.tagInfo{
+	height: 45px;
+	border-bottom: 2px solid rgba(50, 50, 50, 0.4);	
+}
+.tag{
+	cursor: pointer;
+	font-family: navFont;
+	font-weight: bolder;
+	font-size: 18px;
+	letter-spacing: 1px;
+}
+.tag:hover{
+	border-bottom: 2px solid black;
+}
+.followTag, .unfollowTag, 
+button.tagData{
+	background: #385DAB;
+	border: 0;
+	border-radius: 8px;
+	padding: 1px 8px 2px;
+	color: white;
+	font-weight: bold;
+}
+.tag, .followTag, .unfollowTag{
+	margin-top: 23px;
+}
+.followTag, .unfollowTag{
+	margin-left: 10px;
+	cursor: pointer;
+}
+.unfollowTag{
+	background: #CC333B;
+}
+div.tagData{
+	float: right;
+	margin-left: 10px;
+	text-align: center;
+}
+span.tagData{
+	font-size: 20px;
+	color: #545454;
+	font-weight: bold;
+}
+.tagCell{
+	float: left;
+	margin-left: 50px;
+}

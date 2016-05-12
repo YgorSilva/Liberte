@@ -1,0 +1,77 @@
+body{
+	background: url(/layoutImages/bg.jpg);
+	background-size: 100% 100%;
+	color: white;
+}
+#form-content{
+	width: 500px;
+	margin: auto;
+	margin-top: 100px;
+	padding-top: 10px;
+	background: rgba(0, 0, 0, 0.8);
+	border-radius: 33px 33px 0 33px;
+}
+img{
+	margin-left: 218px;
+	width: 60px;
+	height: 60px;
+	border: 2px solid rgba(0, 0, 0, 0);
+	border-radius: 33px;
+	cursor: pointer;
+}
+img:hover{
+	border: 2px solid #fff;
+}
+p.errMss{
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-size: 13px;
+	color: red;
+}
+.fileBtn{
+	height: 0;
+	width: 0;
+}
+.messenge{
+	margin: 0;
+	padding: 0;
+	color: white;
+	text-align: center;
+}
+input[name='email']{
+	margin-top: 10px;
+}
+input[type='radio']{
+	margin-left: 0;
+	width: initial;
+}
+input{
+	width: 200px;
+	margin-left: 150px;
+	margin-top: 5px;
+}
+label{
+	margin-left: 150px;
+}
+button{
+	background: #7c6;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	border-radius: 15px;
+	padding: 5px 15px;
+	color: white;
+	font-weight: bolder;
+	width: 120px;
+	margin-left: 190px;
+	margin-top: 5px;
+	margin-bottom: 8px;
+	cursor: pointer;
+}
+a{
+	text-decoration: none;
+	color: white;
+	font-size: 14px;
+}
+a:hover{
+	text-decoration: underline;
+}

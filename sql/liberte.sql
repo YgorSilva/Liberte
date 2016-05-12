@@ -1,11 +1,3 @@
-CREATE DATABASE IF NOT EXISTS `liberte`;
-USE `liberte`;
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
---
--- Host: 127.0.0.1    Database: liberte
--- ------------------------------------------------------
--- Server version	5.6.16
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
